@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>For Kyllie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #fff8f2;
+      --floral: #ffeef5;
+      --accent: #f8c8dc;
+      --text: #70475b;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Gloria Hallelujah', cursive;
+      background-color: var(--bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+      cursor: url('https://cur.cursors-4u.net/nature/nat-11/nat1042.cur'), auto;
+    }
+
+    .floating-heart, .floating-petal, .floating-butterfly, .floating-sparkle {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-size: cover;
+      animation: float 10s linear infinite;
+      opacity: 0.8;
+      z-index: 0;
+    }
+
+    .floating-heart { background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png'); }
+    .floating-butterfly { background-image: url('https://cdn-icons-png.flaticon.com/512/616/616408.png'); }
+    .floating-sparkle { background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png'); }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+
+    .book-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 24px;
+      padding: 16px;
+      z-index: 1;
+    }
+
+    .book {
+      width: 90vw;
+      max-width: 380px;
+      height: 520px;
+      perspective: 2000px;
+      position: relative;
+    }
+
+    .page {
+      width: 100%;
+      height: 100%;
+      background: var(--floral);
+      border-radius: 24px;
+      box-shadow: 0 20px 60px var(--shadow);
+      border: 3px dashed #fdd6e0;
+      padding: 28px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: left;
+      backface-visibility: hidden;
+      transition: transform 1s ease;
+      transform: rotateY(180deg);
+      z-index: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .page.active {
+      transform: rotateY(0);
+      z-index: 1;
+    }
+
+    .page img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px var(--shadow);
+      border: 2px solid #ffc9dd;
+    }
+
+    .caption {
+      margin-top: 20px;
+      font-size: 16px;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .message {
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .cover-title {
+      font-size: 28px;
+      font-family: 'Dancing Script', cursive;
+      color: #b04f78;
+      margin-bottom: 20px;
+    }
+
+    .cover-sub {
+      font-size: 18px;
+      color: #8e4c63;
+    }
+
+    .controls {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+    }
+
+    button {
+      padding: 12px 24px;
+      border: none;
+      background: var(--accent);
+      color: white;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 16px var(--shadow);
+    }
+
+    button:hover {
+      background: #f5a3c4;
+    }
+
+    .final-message {
+      font-size: 22px;
+      color: var(--text);
+      margin-top: 30px;
+      text-align: center;
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .typewriter {
+      overflow: hidden;
+      border-right: .15em solid #70475b;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: .1em;
+      animation:
+        typing 4s steps(40, end),
+        blink-caret .75s step-end infinite;
+      max-width: 80%;
+      color: var(--text);
+      margin-top: 10px;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #70475b; }
+    }
+
+    .music-controls {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+    }
+
+    .music-controls button {
+      background: var(--accent);
+      border: none;
+      border-radius: 20px;
+      padding: 8px 14px;
+      font-size: 14px;
+      margin-left: 5px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .music-controls button:hover {
+      background: #f5a3c4;
+    }
+  </style>
+</head>
+<body>
+
+<div class="book-container">
+  <div class="book" id="book">
+    <div class="page active">
+      <div class="cover-title">For Kyllie 💌</div>
+      <div class="cover-sub">a little something from Han</div>
+      <div class="typewriter">scroll through the pages!</div>
+    </div>
+    <div class="page">
+      <img src="photo1.jpg" alt="Us">
+      <div class="caption">did you know? you’re the first thought that makes my heart bloom every day 💐</div>
+    </div>
+    <div class="page">
+      <img src="photo2.jpg" alt="Love">
+      <div class="caption">every time with you feels like sunshine in spring 🌸</div>
+    </div>
+    <div class="page">
+      <img src="photo3.jpg" alt="Memory">
+      <div class="caption">and you are the masterpiece i never knew how to draw, and this is the canvas i never knew how to color 🖌️</div>
+    </div>
+    <div class="page">
+      <img src="photo4.jpg" alt="Forever">
+      <div class="caption">with you, every moment is a petal in the bouquet of forever 🌷</div>
+    </div>
+    <div class="page">
+      <img src="photo5.jpg" alt="Laughs">
+      <div class="caption">even in the silliest or darkest moments, your laugh and smile is the melody of my happiness 🎶</div>
+    </div>
+    <div class="page">
+      <img src="photo6.jpg" alt="Smiles">
+      <div class="caption">and at last my favorite thing, seeing you happy and exposing that sunshine of a smile 🌞</div>
+    </div>
+    <div class="page">
+      <div class="message final-message">to: my forever favorite person ❤️<br>— from Han</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="backBtn" onclick="prevPage()">←</button>
+    <button id="nextBtn" onclick="nextPage()">→</button>
+  </div>
+</div>
+
+<script>
+  let current = 0;
+  const pages = document.querySelectorAll('.page');
+  const nextBtn = document.getElementById('nextBtn');
+  const backBtn = document.getElementById('backBtn');
+
+  function showPage(index) {
+    pages.forEach((page, i) => {
+      page.classList.remove('active');
+      if (i <= index) {
+        page.style.transform = 'rotateY(0deg)';
+        page.style.zIndex = i + 1;
+      } else {
+        page.style.transform = 'rotateY(180deg)';
+        page.style.zIndex = pages.length - i;
+      }
+    });
+    pages[index].classList.add('active');
+
+    backBtn.disabled = index === 0;
+    nextBtn.disabled = index === pages.length - 1;
+
+    if (index === pages.length - 1) triggerConfetti();
+  }
+
+  function nextPage() {
+    if (current < pages.length - 1) {
+      current++;
+      showPage(current);
+    }
+  }
+
+  function prevPage() {
+    if (current > 0) {
+      current--;
+      showPage(current);
+    }
+  }
+
+  function createFloatingElements(type, count) {
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('div');
+      el.className = type;
+      el.style.left = Math.random() * 100 + 'vw';
+      el.style.top = 100 + Math.random() * 200 + 'vh';
+      el.style.animationDuration = (8 + Math.random() * 5) + 's';
+      el.style.opacity = 0.3 + Math.random() * 0.7;
+      el.style.transform = `rotate(${Math.random() * 360}deg)`;
+      document.body.appendChild(el);
+    }
+  }
+
+  function triggerConfetti() {
+    for (let i = 0; i < 60; i++) {
+      const confetti = document.createElement('div');
+      confetti.className = 'floating-sparkle';
+      confetti.style.left = Math.random() * 100 + 'vw';
+      confetti.style.top = '-10vh';
+      confetti.style.animationDuration = (4 + Math.random() * 3) + 's';
+      confetti.style.opacity = 0.6 + Math.random() * 0.4;
+      document.body.appendChild(confetti);
+    }
+  }
+
+  function playWill() {
+    const willAudio = document.getElementById('willAudio');
+    willAudio.play();
+  }
+
+  function pauseWill() {
+    const willAudio = document.getElementById('willAudio');
+    willAudio.pause();
+  }
+
+  showPage(current);
+  createFloatingElements('floating-heart', 8);
+  createFloatingElements('floating-petal', 10);
+  createFloatingElements('floating-butterfly', 6);
+</script>
+</body>
+</html>
