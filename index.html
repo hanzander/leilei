@@ -452,6 +452,42 @@
       animation: pulse 2s ease-in-out infinite;
     }
 
+    /* Background Video */
+    .background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 1s ease;
+      pointer-events: none;
+    }
+
+    .background-video.show {
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .background-video-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 248, 242, 0.5);
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 1s ease;
+      pointer-events: none;
+    }
+
+    .background-video-overlay.show {
+      opacity: 1;
+    }
+
     @keyframes pulse {
       0%, 100% {
         opacity: 0.7;
@@ -590,6 +626,14 @@
         font-size: 18px;
         margin-top: 20px;
       }
+
+      .background-video {
+        opacity: 0.25;
+      }
+
+      .background-video-overlay {
+        background: rgba(255, 248, 242, 0.6);
+      }
     }
 
     @media (max-width: 480px) {
@@ -696,6 +740,12 @@
   </style>
 </head>
 <body>
+<video id="backgroundVideo" class="background-video" autoplay loop muted playsinline>
+  <source src="background-video.mp4" type="video/mp4">
+  <source src="background-video.webm" type="video/webm">
+  Your browser does not support the video tag.
+</video>
+<div class="background-video-overlay" id="videoOverlay"></div>
 
 <div class="book-container">
   <div class="book" id="book">
@@ -824,6 +874,8 @@ i love you always, my plant master.
       const letterContainer = document.getElementById('letterContainer');
       const letterFolded = document.getElementById('letterFolded');
       const letterOpen = document.getElementById('letterOpen');
+      const backgroundVideo = document.getElementById('backgroundVideo');
+      const videoOverlay = document.getElementById('videoOverlay');
       
       envelope.classList.remove('open');
       letterContainer.classList.remove('show');
@@ -831,6 +883,13 @@ i love you always, my plant master.
       letterOpen.classList.remove('show');
       envelopeOpened = false;
       letterOpened = false;
+      
+      // Hide and pause background video
+      if (backgroundVideo) {
+        backgroundVideo.classList.remove('show');
+        videoOverlay.classList.remove('show');
+        backgroundVideo.pause();
+      }
     }
   }
 
@@ -892,12 +951,23 @@ i love you always, my plant master.
     
     const envelope = document.getElementById('envelope');
     const letterContainer = document.getElementById('letterContainer');
+    const backgroundVideo = document.getElementById('backgroundVideo');
+    const videoOverlay = document.getElementById('videoOverlay');
     
     envelope.classList.add('open');
     setTimeout(() => {
       letterContainer.classList.add('show');
       envelopeOpened = true;
       triggerConfetti();
+      
+      // Show and play background video
+      if (backgroundVideo) {
+        backgroundVideo.classList.add('show');
+        videoOverlay.classList.add('show');
+        backgroundVideo.play().catch(e => {
+          console.log('Video autoplay prevented:', e);
+        });
+      }
     }, 300);
   }
 
