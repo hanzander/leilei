@@ -4,9 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For Kyllie</title>
+  
+  <!-- Resource hints for faster external resource loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn-icons-png.flaticon.com">
+  <link rel="dns-prefetch" href="https://cur.cursors-4u.net">
+  
+  <!-- Preload critical resources -->
+  <link rel="preload" href="background-video.mp4" as="video" type="video/mp4">
+  <link rel="preload" href="background-video.webm" as="video" type="video/webm">
+  <link rel="preload" href="photo1.jpg" as="image">
+  <link rel="preload" href="photo2.JPG" as="image">
+  <link rel="preload" href="photo3.JPG" as="image">
+  <link rel="preload" href="photo4.jpg" as="image">
+  <link rel="preload" href="photo5.jpg" as="image">
+  <link rel="preload" href="photo6.jpg" as="image">
+  <link rel="preload" href="photo7.jpg" as="image">
+  <link rel="preload" href="photo.jpg" as="image">
+  
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2270%22>❤️</text></svg>">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2270%22>❤️</text></svg>">
   <style>
     :root {
       --bg: #fff8f2;
@@ -57,6 +76,7 @@
       gap: 24px;
       padding: 16px;
       z-index: 1;
+      position: relative;
     }
 
     .book {
@@ -65,7 +85,9 @@
       height: 520px;
       perspective: 2000px;
       position: relative;
-      transition: opacity 0.8s ease, transform 0.8s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      margin-bottom: 20px;
+      z-index: 10;
     }
 
     .book.hidden {
@@ -77,7 +99,7 @@
     .controls.hidden {
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.8s ease;
+      transition: opacity 0.3s ease;
     }
 
     .page {
@@ -93,8 +115,9 @@
       left: 0;
       transform-origin: left;
       backface-visibility: hidden;
-      transition: transform 1s ease;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       transform: rotateY(180deg);
+      will-change: transform;
       z-index: 0;
       display: flex;
       flex-direction: column;
@@ -149,6 +172,9 @@
       display: flex;
       gap: 16px;
       justify-content: center;
+      position: relative;
+      z-index: 0;
+      margin-top: -40px;
     }
 
     button {
@@ -736,11 +762,208 @@
         padding: 8px 16px;
         font-size: 13px;
       }
+
+      .valentine-message {
+        gap: 20px;
+      }
+
+      .valentine-title {
+        font-size: 24px;
+      }
+
+      .valentine-text {
+        font-size: 14px;
+      }
+
+      .valentine-question {
+        font-size: 22px;
+      }
+
+      .valentine-note {
+        font-size: 13px;
+      }
+
+      .valentine-answer {
+        font-size: 16px;
+      }
+
+      .menu-container {
+        gap: 12px;
+      }
+
+      .menu-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+
+      .back-to-menu {
+        padding: 10px 20px;
+        font-size: 12px;
+      }
+    }
+
+    /* Valentine Message Styles */
+    .valentine-message {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      padding: 30px;
+      background: linear-gradient(135deg, #ffe4f0 0%, #fff0f5 100%);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(248, 200, 220, 0.3);
+      border: 2px solid #f8c8dc;
+      position: relative;
+      animation: heartbeat 2s ease-in-out infinite;
+    }
+
+    .valentine-title {
+      font-size: 32px;
+      font-family: 'Dancing Script', cursive;
+      color: #b04f78;
+      text-align: center;
+    }
+
+    .valentine-text {
+      font-size: 16px;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.8;
+      max-width: 90%;
+    }
+
+    .valentine-question {
+      font-size: 28px;
+      font-family: 'Dancing Script', cursive;
+      color: #d91e63;
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .valentine-note {
+      font-size: 15px;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.8;
+      max-width: 90%;
+      font-style: italic;
+    }
+
+    .valentine-answer {
+      font-size: 18px;
+      font-family: 'Dancing Script', cursive;
+      color: #ff1493;
+      text-align: center;
+      animation: sparkle 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+      25% {
+        transform: scale(1.02);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+      75% {
+        transform: scale(1.02);
+      }
+    }
+
+    @keyframes sparkle {
+      0%, 100% {
+        opacity: 0.7;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* Menu Styles */
+    .menu-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 40px;
+      align-items: center;
+    }
+
+    .menu-btn {
+      padding: 14px 32px;
+      background: linear-gradient(135deg, #f8c8dc 0%, #f5a3c4 100%);
+      border: 2px solid #f5a3c4;
+      color: white;
+      border-radius: 25px;
+      font-size: 16px;
+      font-family: 'Gloria Hallelujah', cursive;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(248, 200, 220, 0.3);
+      font-weight: 600;
+    }
+
+    .menu-btn:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #f5a3c4 0%, #f285b4 100%);
+      box-shadow: 0 6px 20px rgba(248, 200, 220, 0.5);
+    }
+
+    .menu-btn:active {
+      transform: scale(0.98);
+    }
+
+    .back-to-menu {
+      padding: 12px 24px;
+      font-size: 15px;
+      margin-top: 20px;
+    }
+
+    /* Heart Icon Button */
+    .heart-icon-btn {
+      width: 50px;
+      height: 50px;
+      padding: 0;
+      background: linear-gradient(135deg, #f8c8dc 0%, #f5a3c4 100%);
+      border: 2px solid #f5a3c4;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(248, 200, 220, 0.3);
+      position: relative;
+      font-size: 0;
+    }
+
+    .heart-icon-btn::before {
+      content: '';
+      position: absolute;
+      width: 24px;
+      height: 24px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .heart-icon-btn:hover {
+      transform: scale(1.15);
+      background: linear-gradient(135deg, #f5a3c4 0%, #f285b4 100%);
+      box-shadow: 0 6px 20px rgba(248, 200, 220, 0.5);
+    }
+
+    .heart-icon-btn:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
 <body>
-<video id="backgroundVideo" class="background-video" autoplay loop muted playsinline>
+<video id="backgroundVideo" class="background-video" autoplay loop muted playsinline preload="metadata">
   <source src="background-video.mp4" type="video/mp4">
   <source src="background-video.webm" type="video/webm">
   Your browser does not support the video tag.
@@ -752,42 +975,68 @@
     <div class="page active">
       <div class="cover-title">For Kyllie 💌</div>
       <div class="cover-sub">a little something from Han</div>
-      <div class="typewriter">scroll through the pages!</div>
+      <div class="menu-container">
+        <button class="menu-btn" onclick="selectBook('letter')">Love Letter</button>
+        <button class="heart-icon-btn" onclick="selectBook('valentine')"></button>
+      </div>
     </div>
     <div class="page">
-      <img src="photo1.jpg" alt="Us">
-      <div class="caption">did you know? you’re the first thought that makes my heart bloom every day 💐</div>
+      <img src="photo1.jpg" alt="Us" loading="eager" decoding="async">
+      <div class="caption">did you know? you're the first thought that makes my heart bloom every day 💐</div>
     </div>
     <div class="page">
-      <img src="photo2.jpg" alt="Love">
+      <img src="photo2.JPG" alt="Love" loading="eager" decoding="async">
       <div class="caption">every time with you feels like sunshine in spring 🌸</div>
     </div>
     <div class="page">
-      <img src="photo3.jpg" alt="Memory">
+      <img src="photo3.JPG" alt="Memory" loading="eager" decoding="async">
       <div class="caption">and you are the masterpiece i never knew how to draw, and this is the canvas i never knew how to color 🖌️</div>
     </div>
     <div class="page">
-      <img src="photo4.jpg" alt="Forever">
+      <img src="photo4.jpg" alt="Forever" loading="eager" decoding="async">
       <div class="caption">with you</div>
     </div>
       <div class="page">
-      <img src="photo7.jpg" alt="Forever">
+      <img src="photo7.jpg" alt="Forever" loading="eager" decoding="async">
       <div class="caption">every moment is a petal in the bouquet of forever 🌷</div>
     </div>
     <div class="page">
-      <img src="photo5.jpg" alt="Laughs">
+      <img src="photo5.jpg" alt="Laughs" loading="eager" decoding="async">
       <div class="caption">even in the silliest or darkest moments</div>
     </div>
      <div class="page">
-      <img src="photo.jpg" alt="Laughs">
+      <img src="photo.jpg" alt="Laughs" loading="eager" decoding="async">
       <div class="caption">your laugh and smile is the melody of my happiness 🎶</div>
     </div>
     <div class="page">
-      <img src="photo6.jpg" alt="Smiles">
+      <img src="photo6.jpg" alt="Smiles" loading="eager" decoding="async">
       <div class="caption">and at last my favorite thing, seeing you happy and exposing that sunshine of a smile 🌞</div>
     </div>
     <div class="page">
       <div class="message final-message">to: my forever favorite person ❤️<br>— from Han</div>
+    </div>
+  </div>
+
+  <div class="book" id="valentineBook" style="display: none;">
+    <div class="page active">
+      <div class="cover-title">Will You Be My Valentine? 💕</div>
+      <div class="cover-sub">a question from Han's heart</div>
+      <div class="menu-container">
+        <button class="menu-btn back-to-menu" onclick="backToMenu()">← Back to Menu</button>
+      </div>
+    </div>
+    <div class="page">
+      <div class="valentine-message">
+        <div class="valentine-title">hey kyky 💝</div>
+        <div class="valentine-text">
+          so you know how we have a lot of firsts together? first kiss, first date, first "i love you"... and now i want to ask you something that feels just as important.
+        </div>
+        <div class="valentine-question">will you be my valentine? 💕</div>
+        <div class="valentine-note">
+          i promise to love you fiercely, support your dreams, and fill our days with laughter and warmth. not just on valentine's day, but every single day.
+        </div>
+        <div class="valentine-answer">i can't wait to hear your answer 🌹</div>
+      </div>
     </div>
   </div>
 
@@ -831,80 +1080,161 @@ i love you always, my plant master.
 
 <script>
   let current = 0;
-  const pages = document.querySelectorAll('.page');
+  let currentBook = 'menu'; // 'menu', 'letter', or 'valentine'
+  let letterBook = null;
+  let valentineBook = null;
+  let letterPages = null;
+  let valentinePages = null;
+  
   const nextBtn = document.getElementById('nextBtn');
   const backBtn = document.getElementById('backBtn');
 
   const book = document.getElementById('book');
   const controls = document.querySelector('.controls');
   const letterSection = document.getElementById('letterSection');
-  const lastPageIndex = pages.length - 1;
+  
+  // Cache DOM elements for letter section
+  const envelope = document.getElementById('envelope');
+  const letterContainer = document.getElementById('letterContainer');
+  const letterFolded = document.getElementById('letterFolded');
+  const letterOpen = document.getElementById('letterOpen');
+  const backgroundVideo = document.getElementById('backgroundVideo');
+  const videoOverlay = document.getElementById('videoOverlay');
+  
+  // Initialize books
+  function initializeBooks() {
+    letterBook = document.getElementById('book');
+    valentineBook = document.getElementById('valentineBook');
+    letterPages = letterBook.querySelectorAll('.page');
+    valentinePages = valentineBook.querySelectorAll('.page');
+  }
+  
+  // Preload all images immediately
+  const imageSources = ['photo1.jpg', 'photo2.JPG', 'photo3.JPG', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg', 'photo7.jpg', 'photo.jpg'];
+  imageSources.forEach(src => {
+    const img = new Image();
+    img.src = src;
+  });
 
-  function showPage(index) {
-    pages.forEach((page, i) => {
-      page.classList.remove('active');
-      if (i <= index) {
-        page.style.transform = 'rotateY(0deg)';
-        page.style.zIndex = i + 1;
-      } else {
-        page.style.transform = 'rotateY(180deg)';
-        page.style.zIndex = pages.length - i;
-      }
-    });
-    pages[index].classList.add('active');
-
-    backBtn.disabled = index === 0;
-    nextBtn.disabled = index === lastPageIndex;
-
-    // Hide book and show letter section on last page
-    if (index === lastPageIndex) {
-      setTimeout(() => {
-        book.classList.add('hidden');
-        controls.classList.add('hidden');
-        letterSection.classList.add('show');
-        triggerConfetti();
-      }, 500); // Wait for page flip animation
-    } else {
-      book.classList.remove('hidden');
-      controls.classList.remove('hidden');
-      letterSection.classList.remove('show');
-      
-      // Reset letter state when navigating away from last page
-      const envelope = document.getElementById('envelope');
-      const letterContainer = document.getElementById('letterContainer');
-      const letterFolded = document.getElementById('letterFolded');
-      const letterOpen = document.getElementById('letterOpen');
-      const backgroundVideo = document.getElementById('backgroundVideo');
-      const videoOverlay = document.getElementById('videoOverlay');
-      
-      envelope.classList.remove('open');
-      letterContainer.classList.remove('show');
-      letterFolded.style.display = 'block';
-      letterOpen.classList.remove('show');
-      envelopeOpened = false;
-      letterOpened = false;
-      
-      // Hide and pause background video
-      if (backgroundVideo) {
-        backgroundVideo.classList.remove('show');
-        videoOverlay.classList.remove('show');
-        backgroundVideo.pause();
-      }
+  function selectBook(bookType) {
+    if (bookType === 'letter') {
+      currentBook = 'letter';
+      current = 1; // Skip the menu page
+      letterBook.style.display = 'block';
+      valentineBook.style.display = 'none';
+      showPage(current, 'letter');
+    } else if (bookType === 'valentine') {
+      currentBook = 'valentine';
+      current = 1; // Skip the menu page
+      letterBook.style.display = 'none';
+      valentineBook.style.display = 'block';
+      showPage(current, 'valentine');
     }
   }
 
+  function backToMenu() {
+    currentBook = 'menu';
+    current = 0;
+    letterBook.style.display = 'block';
+    valentineBook.style.display = 'none';
+    showPage(0, 'letter');
+  }
+
+  function showPage(index, bookType = currentBook) {
+    // Use requestAnimationFrame for smoother transitions
+    requestAnimationFrame(() => {
+      let pages, lastPageIndex;
+      
+      if (bookType === 'valentine') {
+        pages = valentinePages;
+        lastPageIndex = valentinePages.length - 1;
+      } else {
+        pages = letterPages;
+        lastPageIndex = letterPages.length - 1;
+      }
+
+      pages.forEach((page, i) => {
+        page.classList.remove('active');
+        if (i <= index) {
+          page.style.transform = 'rotateY(0deg)';
+          page.style.zIndex = i + 1;
+        } else {
+          page.style.transform = 'rotateY(180deg)';
+          page.style.zIndex = pages.length - i;
+        }
+      });
+      pages[index].classList.add('active');
+
+      backBtn.disabled = (index === 0 && bookType !== 'valentine') || (index === 0 && bookType === 'valentine');
+      nextBtn.disabled = index === lastPageIndex;
+
+      // Hide book and show letter section on last page of letter book
+      if (index === lastPageIndex && bookType === 'letter') {
+        setTimeout(() => {
+          letterBook.classList.add('hidden');
+          controls.classList.add('hidden');
+          letterSection.classList.add('show');
+          triggerConfetti();
+        }, 300);
+      } else if (index === lastPageIndex && bookType === 'valentine') {
+        // For valentine book, just disable next button
+        letterBook.classList.remove('hidden');
+        controls.classList.remove('hidden');
+        letterSection.classList.remove('show');
+      } else {
+        letterBook.classList.remove('hidden');
+        controls.classList.remove('hidden');
+        letterSection.classList.remove('show');
+        
+        // Reset letter state when navigating away from last page
+        envelope.classList.remove('open');
+        letterContainer.classList.remove('show');
+        letterFolded.style.display = 'block';
+        letterOpen.classList.remove('show');
+        envelopeOpened = false;
+        letterOpened = false;
+        
+        // Hide and pause background video
+        if (backgroundVideo) {
+          backgroundVideo.classList.remove('show');
+          videoOverlay.classList.remove('show');
+          backgroundVideo.pause();
+        }
+      }
+    });
+  }
+
   function nextPage() {
-    if (current < pages.length - 1) {
-      current++;
-      showPage(current);
+    let pages;
+    if (currentBook === 'valentine') {
+      pages = valentinePages;
+      if (current < pages.length - 1) {
+        current++;
+        showPage(current, 'valentine');
+      }
+    } else {
+      pages = letterPages;
+      if (current < pages.length - 1) {
+        current++;
+        showPage(current, 'letter');
+      }
     }
   }
 
   function prevPage() {
     if (current > 0) {
       current--;
-      showPage(current);
+      if (currentBook === 'valentine') {
+        showPage(current, 'valentine');
+      } else {
+        showPage(current, 'letter');
+      }
     }
+  }
+  
+  // Preload video when page loads
+  if (backgroundVideo) {
+    backgroundVideo.load();
   }
 
   function createFloatingElements(type, count) {
@@ -949,11 +1279,6 @@ i love you always, my plant master.
   function openEnvelope() {
     if (envelopeOpened) return;
     
-    const envelope = document.getElementById('envelope');
-    const letterContainer = document.getElementById('letterContainer');
-    const backgroundVideo = document.getElementById('backgroundVideo');
-    const videoOverlay = document.getElementById('videoOverlay');
-    
     envelope.classList.add('open');
     setTimeout(() => {
       letterContainer.classList.add('show');
@@ -968,14 +1293,11 @@ i love you always, my plant master.
           console.log('Video autoplay prevented:', e);
         });
       }
-    }, 300);
+    }, 200);
   }
 
   function openLetter() {
     if (letterOpened) return;
-    
-    const letterFolded = document.getElementById('letterFolded');
-    const letterOpen = document.getElementById('letterOpen');
     
     letterFolded.style.display = 'none';
     letterOpen.classList.add('show');
@@ -983,7 +1305,8 @@ i love you always, my plant master.
     triggerConfetti();
   }
 
-  showPage(current);
+  initializeBooks();
+  showPage(current, 'letter');
   createFloatingElements('floating-heart', 8);
   createFloatingElements('floating-petal', 10);
   createFloatingElements('floating-butterfly', 6);
