@@ -1,1315 +1,1876 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For Kyllie</title>
-  
-  <!-- Resource hints for faster external resource loading -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="dns-prefetch" href="https://cdn-icons-png.flaticon.com">
-  <link rel="dns-prefetch" href="https://cur.cursors-4u.net">
-  
-  <!-- Preload critical resources -->
-  <link rel="preload" href="background-video.mp4" as="video" type="video/mp4">
-  <link rel="preload" href="background-video.webm" as="video" type="video/webm">
-  <link rel="preload" href="photo1.jpg" as="image">
-  <link rel="preload" href="photo2.JPG" as="image">
-  <link rel="preload" href="photo3.JPG" as="image">
-  <link rel="preload" href="photo4.jpg" as="image">
-  <link rel="preload" href="photo5.jpg" as="image">
-  <link rel="preload" href="photo6.jpg" as="image">
-  <link rel="preload" href="photo7.jpg" as="image">
-  <link rel="preload" href="photo.jpg" as="image">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap" rel="stylesheet">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2270%22>❤️</text></svg>">
-  <style>
-    :root {
-      --bg: #fff8f2;
-      --floral: #ffeef5;
-      --accent: #f8c8dc;
-      --text: #70475b;
-      --shadow: rgba(0, 0, 0, 0.1);
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Kyllie</title>
 
-    * { box-sizing: border-box; }
+    <!-- Resource hints for faster external resource loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdn-icons-png.flaticon.com" />
+    <link rel="dns-prefetch" href="https://cur.cursors-4u.net" />
 
-    body {
-      margin: 0;
-      font-family: 'Gloria Hallelujah', cursive;
-      background-color: var(--bg);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      overflow: hidden;
-      cursor: url('https://cur.cursors-4u.net/nature/nat-11/nat1042.cur'), auto;
-    }
+    <!-- Preload critical resources -->
+    <link
+      rel="preload"
+      href="background-video.mp4"
+      as="video"
+      type="video/mp4"
+    />
+    <link
+      rel="preload"
+      href="background-video.webm"
+      as="video"
+      type="video/webm"
+    />
+    <link rel="preload" href="photo1.jpg" as="image" />
+    <link rel="preload" href="photo2.JPG" as="image" />
+    <link rel="preload" href="photo3.JPG" as="image" />
+    <link rel="preload" href="photo4.jpg" as="image" />
+    <link rel="preload" href="photo5.jpg" as="image" />
+    <link rel="preload" href="photo6.jpg" as="image" />
+    <link rel="preload" href="photo7.jpg" as="image" />
+    <link rel="preload" href="photo.jpg" as="image" />
 
-    .floating-heart, .floating-petal, .floating-butterfly, .floating-sparkle {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background-size: cover;
-      animation: float 10s linear infinite;
-      opacity: 0.8;
-      z-index: 0;
-    }
-
-    .floating-heart { background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png'); }
-    .floating-butterfly { background-image: url('https://cdn-icons-png.flaticon.com/512/616/616408.png'); }
-    .floating-sparkle { background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png'); }
-
-    @keyframes float {
-      0% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
-    }
-
-    .book-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 24px;
-      padding: 16px;
-      z-index: 1;
-      position: relative;
-    }
-
-    .book {
-      width: 90vw;
-      max-width: 380px;
-      height: 520px;
-      perspective: 2000px;
-      position: relative;
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      margin-bottom: 20px;
-      z-index: 10;
-    }
-
-    .book.hidden {
-      opacity: 0;
-      transform: scale(0.9);
-      pointer-events: none;
-    }
-
-    .controls.hidden {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .page {
-      width: 100%;
-      height: 100%;
-      background: var(--floral);
-      border-radius: 24px;
-      box-shadow: 0 20px 60px var(--shadow);
-      border: 3px dashed #fdd6e0;
-      padding: 28px;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform-origin: left;
-      backface-visibility: hidden;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      transform: rotateY(180deg);
-      will-change: transform;
-      z-index: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .page.active {
-      transform: rotateY(0);
-      z-index: 1;
-    }
-
-    .page img {
-      width: 100%;
-      height: 260px;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px var(--shadow);
-      border: 2px solid #ffc9dd;
-    }
-
-    .caption {
-      margin-top: 20px;
-      font-size: 16px;
-      color: var(--text);
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    .message {
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--text);
-      text-align: center;
-      line-height: 1.8;
-    }
-
-    .cover-title {
-      font-size: 28px;
-      font-family: 'Dancing Script', cursive;
-      color: #b04f78;
-      margin-bottom: 20px;
-    }
-
-    .cover-sub {
-      font-size: 18px;
-      color: #8e4c63;
-    }
-
-    .controls {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      position: relative;
-      z-index: 0;
-      margin-top: -40px;
-    }
-
-    button {
-      padding: 12px 24px;
-      border: none;
-      background: var(--accent);
-      color: white;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 15px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 16px var(--shadow);
-    }
-
-    button:hover {
-      background: #f5a3c4;
-    }
-
-    .final-message {
-      font-size: 22px;
-      color: var(--text);
-      margin-top: 30px;
-      text-align: center;
-    }
-
-    button:disabled {
-      opacity: 0.5;
-      cursor: default;
-    }
-
-    .typewriter {
-      overflow: hidden;
-      border-right: .15em solid #70475b;
-      white-space: nowrap;
-      margin: 0 auto;
-      letter-spacing: .1em;
-      animation:
-        typing 4s steps(40, end),
-        blink-caret .75s step-end infinite;
-      max-width: 80%;
-      color: var(--text);
-      margin-top: 10px;
-    }
-
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #70475b; }
-    }
-
-    .music-controls {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      z-index: 999;
-    }
-
-    .music-controls button {
-      background: var(--accent);
-      border: none;
-      border-radius: 20px;
-      padding: 8px 14px;
-      font-size: 14px;
-      margin-left: 5px;
-      cursor: pointer;
-      color: white;
-    }
-
-    .music-controls button:hover {
-      background: #f5a3c4;
-    }
-
-    /* Letter Section Styles */
-    .letter-section {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 30px;
-      padding: 20px;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90vw;
-      max-width: 500px;
-      z-index: 100;
-      animation: fadeInScale 1s ease;
-    }
-
-    .letter-section.show {
-      display: flex;
-    }
-
-    @keyframes fadeInScale {
-      from {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.8);
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2270%22>❤️</text></svg>"
+    />
+    <style>
+      :root {
+        --bg: #fff8f2;
+        --floral: #ffeef5;
+        --accent: #f8c8dc;
+        --text: #70475b;
+        --shadow: rgba(0, 0, 0, 0.1);
       }
-      to {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1);
+
+      * {
+        box-sizing: border-box;
       }
-    }
 
-    .envelope {
-      width: 300px;
-      height: 225px;
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      z-index: 10;
-      pointer-events: auto;
-    }
-
-    .envelope:hover {
-      transform: scale(1.1);
-    }
-
-    .envelope-body {
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(135deg, #f8c8dc 0%, #f5a3c4 100%);
-      border-radius: 10px 10px 0 0;
-      position: relative;
-      box-shadow: 0 10px 30px var(--shadow);
-      border: 2px solid #ffc9dd;
-    }
-
-    .envelope-flap {
-      width: 100%;
-      height: 60%;
-      background: linear-gradient(135deg, #f5a3c4 0%, #f8c8dc 100%);
-      border-radius: 10px 10px 0 0;
-      position: absolute;
-      top: 0;
-      left: 0;
-      transform-origin: top;
-      transition: transform 0.6s ease;
-      z-index: 2;
-      border: 2px solid #ffc9dd;
-      border-bottom: none;
-    }
-
-    .envelope.open .envelope-flap {
-      transform: rotateX(-180deg);
-    }
-
-    .envelope-seal {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 60px;
-      height: 60px;
-      background: var(--accent);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 36px;
-      z-index: 3;
-      box-shadow: 0 4px 10px var(--shadow);
-    }
-
-    .letter-container {
-      display: none;
-      position: absolute;
-      top: -200px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 350px;
-      max-width: 90vw;
-      perspective: 1000px;
-      z-index: 20;
-    }
-
-    .letter-container.show {
-      display: block;
-      animation: fadeInUp 0.8s ease;
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(30px) scale(0.9);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(-200px) scale(1);
-      }
-    }
-
-    .letter-folded {
-      width: 100%;
-      min-height: 250px;
-      background: var(--floral);
-      border-radius: 12px;
-      box-shadow: 0 15px 40px var(--shadow);
-      border: 3px dashed #fdd6e0;
-      padding: 30px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .letter-folded:hover {
-      transform: scale(1.02);
-      box-shadow: 0 20px 50px var(--shadow);
-    }
-
-    .letter-folded::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 50%;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), transparent);
-      pointer-events: none;
-    }
-
-    .letter-folded-content {
-      text-align: center;
-      color: var(--text);
-      font-size: 18px;
-      font-family: 'Dancing Script', cursive;
-      pointer-events: none;
-    }
-
-    .letter-open {
-      display: none;
-      width: 100%;
-      max-width: 500px;
-      background: var(--floral);
-      border-radius: 12px;
-      box-shadow: 0 20px 60px var(--shadow);
-      border: 3px dashed #fdd6e0;
-      padding: 40px;
-      position: absolute;
-      top: -200px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: unfoldLetter 1s ease;
-      max-height: 70vh;
-      overflow-y: auto;
-      z-index: 30;
-    }
-
-    .letter-open.show {
-      display: block;
-    }
-
-    @keyframes unfoldLetter {
-      0% {
-        transform: translateX(-50%) translateY(-200px) rotateX(90deg);
-        opacity: 0;
-      }
-      50% {
-        transform: translateX(-50%) translateY(-200px) rotateX(45deg);
-      }
-      100% {
-        transform: translateX(-50%) translateY(-200px) rotateX(0deg);
-        opacity: 1;
-      }
-    }
-
-    .letter-content {
-      color: var(--text);
-      font-size: 16px;
-      line-height: 2;
-      text-align: left;
-      font-family: 'Gloria Hallelujah', cursive;
-      white-space: pre-wrap;
-    }
-
-    .letter-content p {
-      margin: 15px 0;
-    }
-
-    .letter-signature {
-      margin-top: 30px;
-      text-align: right;
-      font-family: 'Dancing Script', cursive;
-      font-size: 20px;
-      color: #b04f78;
-    }
-
-    .click-hint {
-      color: var(--text);
-      font-size: 14px;
-      font-style: italic;
-      opacity: 0.7;
-      margin-top: 10px;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    /* Background Video */
-    .background-video {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-      opacity: 0;
-      transition: opacity 1s ease;
-      pointer-events: none;
-    }
-
-    .background-video.show {
-      opacity: 0.3;
-      z-index: 0;
-    }
-
-    .background-video-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 248, 242, 0.5);
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 1s ease;
-      pointer-events: none;
-    }
-
-    .background-video-overlay.show {
-      opacity: 1;
-    }
-
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 0.7;
-      }
-      50% {
-        opacity: 1;
-      }
-    }
-
-    /* Mobile Responsive Styles */
-    @media (max-width: 768px) {
       body {
-        overflow-y: auto;
-        padding: 10px;
+        margin: 0;
+        font-family: "Gloria Hallelujah", cursive;
+        background-color: var(--bg);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        overflow: hidden;
+        cursor: url("https://cur.cursors-4u.net/nature/nat-11/nat1042.cur"),
+          auto;
+      }
+
+      .floating-heart,
+      .floating-petal,
+      .floating-butterfly,
+      .floating-sparkle {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-size: cover;
+        animation: float 10s linear infinite;
+        opacity: 0.8;
+        z-index: 0;
+      }
+
+      .floating-heart {
+        background-image: url("https://cdn-icons-png.flaticon.com/512/833/833472.png");
+      }
+      .floating-butterfly {
+        background-image: url("https://cdn-icons-png.flaticon.com/512/616/616408.png");
+      }
+      .floating-sparkle {
+        background-image: url("https://cdn-icons-png.flaticon.com/512/833/833472.png");
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-100vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .book-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 24px;
+        padding: 16px;
+        z-index: 1;
+        position: relative;
       }
 
       .book {
-        width: 95vw;
-        max-width: 100%;
-        height: auto;
-        min-height: 500px;
-        max-height: 85vh;
+        width: 90vw;
+        max-width: 380px;
+        height: 520px;
+        perspective: 2000px;
+        position: relative;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        margin-bottom: 20px;
+        z-index: 10;
+      }
+
+      /* Slightly larger notebook for monthsary */
+      .book.notebook {
+        max-width: 420px;
+        height: 580px;
+      }
+
+      .book.hidden {
+        opacity: 0;
+        transform: scale(0.9);
+        pointer-events: none;
+      }
+
+      .controls.hidden {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
       }
 
       .page {
-        padding: 20px;
-        border-radius: 16px;
+        width: 100%;
+        height: 100%;
+        background: var(--floral);
+        border-radius: 24px;
+        box-shadow: 0 20px 60px var(--shadow);
+        border: 3px dashed #fdd6e0;
+        padding: 28px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: left;
+        backface-visibility: hidden;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: rotateY(180deg);
+        will-change: transform;
+        z-index: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .page.active {
+        transform: rotateY(0);
+        z-index: 1;
       }
 
       .page img {
-        height: 200px;
+        width: 100%;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 16px;
+        box-shadow: 0 10px 30px var(--shadow);
+        border: 2px solid #ffc9dd;
+      }
+
+      /* Notebook styling (used for 5th Monthsary) */
+      .book.notebook .page {
+        border-style: solid;
+        border-color: rgba(176, 79, 120, 0.18);
+      }
+
+      .notebook-page {
+        text-align: left;
+        align-items: stretch;
+        justify-content: flex-start;
+        padding: 26px 24px 22px 44px; /* extra left for spiral */
+        background: linear-gradient(180deg, #fff9fb 0%, #fff4f8 100%);
+        overflow: hidden;
+      }
+
+      .notebook-page::before {
+        content: "";
+        position: absolute;
+        top: 18px;
+        left: 18px;
+        bottom: 18px;
+        width: 14px;
+        border-radius: 10px;
+        background: linear-gradient(
+          180deg,
+          rgba(176, 79, 120, 0.12) 0%,
+          rgba(176, 79, 120, 0.08) 100%
+        );
+        box-shadow: inset 0 0 0 1px rgba(176, 79, 120, 0.12);
+      }
+
+      .notebook-page::after {
+        content: "";
+        position: absolute;
+        top: 24px;
+        left: 24px;
+        bottom: 24px;
+        width: 2px;
+        background: rgba(176, 79, 120, 0.18);
+      }
+
+      .notebook-lines {
+        position: absolute;
+        inset: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(176, 79, 120, 0.06),
+          rgba(176, 79, 120, 0.06) 1px,
+          transparent 1px,
+          transparent 26px
+        );
+        opacity: 0.9;
+        pointer-events: none;
+        mix-blend-mode: multiply;
+      }
+
+      .notebook-title {
+        font-family: "Dancing Script", cursive;
+        font-size: 30px;
+        color: #b04f78;
+        margin-bottom: 6px;
+        text-align: center;
+      }
+
+      .notebook-subtitle {
+        font-size: 16px;
+        color: #8e4c63;
+        text-align: center;
+        margin-bottom: 14px;
+      }
+
+      .notebook-body {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 12px;
+        height: 100%;
+      }
+
+      .notebook-body img {
+        height: 220px;
+      }
+
+      .notebook-text {
+        font-size: 15px;
+        color: var(--text);
+        line-height: 1.8;
+        overflow: auto;
+        padding-right: 6px;
+      }
+
+      .notebook-text p {
+        margin: 0 0 12px 0;
+      }
+
+      .notebook-signature {
+        margin-top: 10px;
+        font-weight: 700;
+        color: #b04f78;
+        text-align: right;
       }
 
       .caption {
-        font-size: 14px;
-        margin-top: 15px;
-      }
-
-      .cover-title {
-        font-size: 24px;
-      }
-
-      .cover-sub {
+        margin-top: 20px;
         font-size: 16px;
+        color: var(--text);
+        text-align: center;
+        line-height: 1.6;
       }
 
       .message {
-        font-size: 16px;
-      }
-
-      .final-message {
         font-size: 18px;
-      }
-
-      button {
-        padding: 10px 20px;
-        font-size: 14px;
-      }
-
-      .letter-section {
-        width: 95vw;
-        max-width: 100%;
-        padding: 15px;
-      }
-
-      .envelope {
-        width: 250px;
-        height: 188px;
-      }
-
-      .envelope-seal {
-        width: 50px;
-        height: 50px;
-        font-size: 28px;
-      }
-
-      .letter-container {
-        width: 90vw;
-        max-width: 320px;
-        top: -150px;
-      }
-
-      .letter-container.show {
-        animation: fadeInUpMobile 0.8s ease;
-      }
-
-      @keyframes fadeInUpMobile {
-        from {
-          opacity: 0;
-          transform: translateX(-50%) translateY(30px) scale(0.9);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(-50%) translateY(-150px) scale(1);
-        }
-      }
-
-      .letter-folded {
-        padding: 20px;
-        min-height: 200px;
-      }
-
-      .letter-folded-content {
-        font-size: 16px;
-      }
-
-      .letter-open {
-        width: 90vw;
-        max-width: 320px;
-        padding: 25px;
-        top: -150px;
-        max-height: 75vh;
-        animation: unfoldLetterMobile 1s ease;
-      }
-
-      @keyframes unfoldLetterMobile {
-        0% {
-          transform: translateX(-50%) translateY(-150px) rotateX(90deg);
-          opacity: 0;
-        }
-        50% {
-          transform: translateX(-50%) translateY(-150px) rotateX(45deg);
-        }
-        100% {
-          transform: translateX(-50%) translateY(-150px) rotateX(0deg);
-          opacity: 1;
-        }
-      }
-
-      .letter-content {
-        font-size: 14px;
+        font-weight: 500;
+        color: var(--text);
+        text-align: center;
         line-height: 1.8;
       }
 
-      .letter-signature {
-        font-size: 18px;
-        margin-top: 20px;
-      }
-
-      .background-video {
-        opacity: 0.25;
-      }
-
-      .background-video-overlay {
-        background: rgba(255, 248, 242, 0.6);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .book {
-        height: auto;
-        min-height: 450px;
-        max-height: 80vh;
-      }
-
-      .page {
-        padding: 15px;
-      }
-
-      .page img {
-        height: 180px;
-      }
-
-      .caption {
-        font-size: 13px;
-      }
-
       .cover-title {
-        font-size: 22px;
+        font-size: 28px;
+        font-family: "Dancing Script", cursive;
+        color: #b04f78;
+        margin-bottom: 20px;
       }
 
       .cover-sub {
+        font-size: 18px;
+        color: #8e4c63;
+      }
+
+      .controls {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        position: relative;
+        z-index: 0;
+        margin-top: -40px;
+      }
+
+      button {
+        padding: 12px 24px;
+        border: none;
+        background: var(--accent);
+        color: white;
+        border-radius: 30px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 16px var(--shadow);
+      }
+
+      button:hover {
+        background: #f5a3c4;
+      }
+
+      .final-message {
+        font-size: 22px;
+        color: var(--text);
+        margin-top: 30px;
+        text-align: center;
+      }
+
+      button:disabled {
+        opacity: 0.5;
+        cursor: default;
+      }
+
+      .typewriter {
+        overflow: hidden;
+        border-right: 0.15em solid #70475b;
+        white-space: nowrap;
+        margin: 0 auto;
+        letter-spacing: 0.1em;
+        animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        max-width: 80%;
+        color: var(--text);
+        margin-top: 10px;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+
+      @keyframes blink-caret {
+        from,
+        to {
+          border-color: transparent;
+        }
+        50% {
+          border-color: #70475b;
+        }
+      }
+
+      .music-controls {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        z-index: 999;
+      }
+
+      .music-controls button {
+        background: var(--accent);
+        border: none;
+        border-radius: 20px;
+        padding: 8px 14px;
         font-size: 14px;
+        margin-left: 5px;
+        cursor: pointer;
+        color: white;
+      }
+
+      .music-controls button:hover {
+        background: #f5a3c4;
+      }
+
+      /* Letter Section Styles */
+      .letter-section {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        padding: 20px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90vw;
+        max-width: 500px;
+        z-index: 100;
+        animation: fadeInScale 1s ease;
+      }
+
+      .letter-section.show {
+        display: flex;
+      }
+
+      @keyframes fadeInScale {
+        from {
+          opacity: 0;
+          transform: translate(-50%, -50%) scale(0.8);
+        }
+        to {
+          opacity: 1;
+          transform: translate(-50%, -50%) scale(1);
+        }
       }
 
       .envelope {
-        width: 200px;
-        height: 150px;
+        width: 300px;
+        height: 225px;
+        position: relative;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        z-index: 10;
+        pointer-events: auto;
+      }
+
+      .envelope:hover {
+        transform: scale(1.1);
+      }
+
+      .envelope-body {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #f8c8dc 0%, #f5a3c4 100%);
+        border-radius: 10px 10px 0 0;
+        position: relative;
+        box-shadow: 0 10px 30px var(--shadow);
+        border: 2px solid #ffc9dd;
+      }
+
+      .envelope-flap {
+        width: 100%;
+        height: 60%;
+        background: linear-gradient(135deg, #f5a3c4 0%, #f8c8dc 100%);
+        border-radius: 10px 10px 0 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform-origin: top;
+        transition: transform 0.6s ease;
+        z-index: 2;
+        border: 2px solid #ffc9dd;
+        border-bottom: none;
+      }
+
+      .envelope.open .envelope-flap {
+        transform: rotateX(-180deg);
       }
 
       .envelope-seal {
-        width: 40px;
-        height: 40px;
-        font-size: 24px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        background: var(--accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 36px;
+        z-index: 3;
+        box-shadow: 0 4px 10px var(--shadow);
       }
 
       .letter-container {
-        width: 85vw;
-        max-width: 280px;
-        top: -120px;
+        display: none;
+        position: absolute;
+        top: -200px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 350px;
+        max-width: 90vw;
+        perspective: 1000px;
+        z-index: 20;
       }
 
       .letter-container.show {
-        animation: fadeInUpMobileSmall 0.8s ease;
+        display: block;
+        animation: fadeInUp 0.8s ease;
       }
 
-      @keyframes fadeInUpMobileSmall {
+      @keyframes fadeInUp {
         from {
           opacity: 0;
           transform: translateX(-50%) translateY(30px) scale(0.9);
         }
         to {
           opacity: 1;
-          transform: translateX(-50%) translateY(-120px) scale(1);
+          transform: translateX(-50%) translateY(-200px) scale(1);
         }
       }
 
       .letter-folded {
-        padding: 15px;
-        min-height: 180px;
+        width: 100%;
+        min-height: 250px;
+        background: var(--floral);
+        border-radius: 12px;
+        box-shadow: 0 15px 40px var(--shadow);
+        border: 3px dashed #fdd6e0;
+        padding: 30px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .letter-folded:hover {
+        transform: scale(1.02);
+        box-shadow: 0 20px 50px var(--shadow);
+      }
+
+      .letter-folded::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 50%;
+        background: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        pointer-events: none;
+      }
+
+      .letter-folded-content {
+        text-align: center;
+        color: var(--text);
+        font-size: 18px;
+        font-family: "Dancing Script", cursive;
+        pointer-events: none;
       }
 
       .letter-open {
-        width: 85vw;
-        max-width: 280px;
-        padding: 20px;
-        top: -120px;
+        display: none;
+        width: 100%;
+        max-width: 500px;
+        background: var(--floral);
+        border-radius: 12px;
+        box-shadow: 0 20px 60px var(--shadow);
+        border: 3px dashed #fdd6e0;
+        padding: 40px;
+        position: absolute;
+        top: -200px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: unfoldLetter 1s ease;
         max-height: 70vh;
-        animation: unfoldLetterMobileSmall 1s ease;
+        overflow-y: auto;
+        z-index: 30;
       }
 
-      @keyframes unfoldLetterMobileSmall {
+      .letter-open.show {
+        display: block;
+      }
+
+      @keyframes unfoldLetter {
         0% {
-          transform: translateX(-50%) translateY(-120px) rotateX(90deg);
+          transform: translateX(-50%) translateY(-200px) rotateX(90deg);
           opacity: 0;
         }
         50% {
-          transform: translateX(-50%) translateY(-120px) rotateX(45deg);
+          transform: translateX(-50%) translateY(-200px) rotateX(45deg);
         }
         100% {
-          transform: translateX(-50%) translateY(-120px) rotateX(0deg);
+          transform: translateX(-50%) translateY(-200px) rotateX(0deg);
           opacity: 1;
         }
       }
 
       .letter-content {
-        font-size: 13px;
-        line-height: 1.7;
+        color: var(--text);
+        font-size: 16px;
+        line-height: 2;
+        text-align: left;
+        font-family: "Gloria Hallelujah", cursive;
+        white-space: pre-wrap;
+      }
+
+      .letter-content p {
+        margin: 15px 0;
       }
 
       .letter-signature {
-        font-size: 16px;
+        margin-top: 30px;
+        text-align: right;
+        font-family: "Dancing Script", cursive;
+        font-size: 20px;
+        color: #b04f78;
       }
 
-      button {
-        padding: 8px 16px;
-        font-size: 13px;
+      .click-hint {
+        color: var(--text);
+        font-size: 14px;
+        font-style: italic;
+        opacity: 0.7;
+        margin-top: 10px;
+        animation: pulse 2s ease-in-out infinite;
       }
 
+      /* Background Video */
+      .background-video {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 1s ease;
+        pointer-events: none;
+      }
+
+      .background-video.show {
+        opacity: 0.3;
+        z-index: 0;
+      }
+
+      .background-video-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 248, 242, 0.5);
+        z-index: 0;
+        opacity: 0;
+        transition: opacity 1s ease;
+        pointer-events: none;
+      }
+
+      .background-video-overlay.show {
+        opacity: 1;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.7;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* Mobile Responsive Styles */
+      @media (max-width: 768px) {
+        body {
+          overflow-y: auto;
+          padding: 10px;
+        }
+
+        .book {
+          width: 95vw;
+          max-width: 100%;
+          height: auto;
+          min-height: 500px;
+          max-height: 85vh;
+        }
+
+        .book.notebook {
+          max-height: 90vh;
+        }
+
+        .page {
+          padding: 20px;
+          border-radius: 16px;
+        }
+
+        .page img {
+          height: 200px;
+        }
+
+        .caption {
+          font-size: 14px;
+          margin-top: 15px;
+        }
+
+        .cover-title {
+          font-size: 24px;
+        }
+
+        .cover-sub {
+          font-size: 16px;
+        }
+
+        .message {
+          font-size: 16px;
+        }
+
+        .final-message {
+          font-size: 18px;
+        }
+
+        button {
+          padding: 10px 20px;
+          font-size: 14px;
+        }
+
+        .letter-section {
+          width: 95vw;
+          max-width: 100%;
+          padding: 15px;
+        }
+
+        .envelope {
+          width: 250px;
+          height: 188px;
+        }
+
+        .envelope-seal {
+          width: 50px;
+          height: 50px;
+          font-size: 28px;
+        }
+
+        .letter-container {
+          width: 90vw;
+          max-width: 320px;
+          top: -150px;
+        }
+
+        .letter-container.show {
+          animation: fadeInUpMobile 0.8s ease;
+        }
+
+        @keyframes fadeInUpMobile {
+          from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(30px) scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-150px) scale(1);
+          }
+        }
+
+        .letter-folded {
+          padding: 20px;
+          min-height: 200px;
+        }
+
+        .letter-folded-content {
+          font-size: 16px;
+        }
+
+        .letter-open {
+          width: 90vw;
+          max-width: 320px;
+          padding: 25px;
+          top: -150px;
+          max-height: 75vh;
+          animation: unfoldLetterMobile 1s ease;
+        }
+
+        @keyframes unfoldLetterMobile {
+          0% {
+            transform: translateX(-50%) translateY(-150px) rotateX(90deg);
+            opacity: 0;
+          }
+          50% {
+            transform: translateX(-50%) translateY(-150px) rotateX(45deg);
+          }
+          100% {
+            transform: translateX(-50%) translateY(-150px) rotateX(0deg);
+            opacity: 1;
+          }
+        }
+
+        .letter-content {
+          font-size: 14px;
+          line-height: 1.8;
+        }
+
+        .letter-signature {
+          font-size: 18px;
+          margin-top: 20px;
+        }
+
+        .background-video {
+          opacity: 0.25;
+        }
+
+        .background-video-overlay {
+          background: rgba(255, 248, 242, 0.6);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .book {
+          height: auto;
+          min-height: 450px;
+          max-height: 80vh;
+        }
+
+        .page {
+          padding: 15px;
+        }
+
+        .page img {
+          height: 180px;
+        }
+
+        .caption {
+          font-size: 13px;
+        }
+
+        .cover-title {
+          font-size: 22px;
+        }
+
+        .cover-sub {
+          font-size: 14px;
+        }
+
+        .envelope {
+          width: 200px;
+          height: 150px;
+        }
+
+        .envelope-seal {
+          width: 40px;
+          height: 40px;
+          font-size: 24px;
+        }
+
+        .letter-container {
+          width: 85vw;
+          max-width: 280px;
+          top: -120px;
+        }
+
+        .letter-container.show {
+          animation: fadeInUpMobileSmall 0.8s ease;
+        }
+
+        @keyframes fadeInUpMobileSmall {
+          from {
+            opacity: 0;
+            transform: translateX(-50%) translateY(30px) scale(0.9);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-120px) scale(1);
+          }
+        }
+
+        .letter-folded {
+          padding: 15px;
+          min-height: 180px;
+        }
+
+        .letter-open {
+          width: 85vw;
+          max-width: 280px;
+          padding: 20px;
+          top: -120px;
+          max-height: 70vh;
+          animation: unfoldLetterMobileSmall 1s ease;
+        }
+
+        @keyframes unfoldLetterMobileSmall {
+          0% {
+            transform: translateX(-50%) translateY(-120px) rotateX(90deg);
+            opacity: 0;
+          }
+          50% {
+            transform: translateX(-50%) translateY(-120px) rotateX(45deg);
+          }
+          100% {
+            transform: translateX(-50%) translateY(-120px) rotateX(0deg);
+            opacity: 1;
+          }
+        }
+
+        .letter-content {
+          font-size: 13px;
+          line-height: 1.7;
+        }
+
+        .letter-signature {
+          font-size: 16px;
+        }
+
+        button {
+          padding: 8px 16px;
+          font-size: 13px;
+        }
+
+        .valentine-message {
+          gap: 20px;
+        }
+
+        .valentine-title {
+          font-size: 24px;
+        }
+
+        .valentine-text {
+          font-size: 14px;
+        }
+
+        .valentine-question {
+          font-size: 22px;
+        }
+
+        .valentine-note {
+          font-size: 13px;
+        }
+
+        .valentine-answer {
+          font-size: 16px;
+        }
+
+        .menu-container {
+          gap: 12px;
+        }
+
+        .menu-btn {
+          padding: 12px 24px;
+          font-size: 14px;
+        }
+
+        .back-to-menu {
+          padding: 10px 20px;
+          font-size: 12px;
+        }
+      }
+
+      /* Valentine Message Styles */
       .valentine-message {
-        gap: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+        padding: 30px;
+        background: linear-gradient(135deg, #ffe4f0 0%, #fff0f5 100%);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(248, 200, 220, 0.3);
+        border: 2px solid #f8c8dc;
+        position: relative;
+        animation: heartbeat 2s ease-in-out infinite;
       }
 
       .valentine-title {
-        font-size: 24px;
+        font-size: 32px;
+        font-family: "Dancing Script", cursive;
+        color: #b04f78;
+        text-align: center;
       }
 
       .valentine-text {
-        font-size: 14px;
+        font-size: 16px;
+        color: var(--text);
+        text-align: center;
+        line-height: 1.8;
+        max-width: 90%;
       }
 
       .valentine-question {
-        font-size: 22px;
+        font-size: 28px;
+        font-family: "Dancing Script", cursive;
+        color: #d91e63;
+        text-align: center;
+        font-weight: bold;
+        letter-spacing: 1px;
       }
 
       .valentine-note {
-        font-size: 13px;
+        font-size: 15px;
+        color: var(--text);
+        text-align: center;
+        line-height: 1.8;
+        max-width: 90%;
+        font-style: italic;
       }
 
       .valentine-answer {
-        font-size: 16px;
+        font-size: 18px;
+        font-family: "Dancing Script", cursive;
+        color: #ff1493;
+        text-align: center;
+        animation: sparkle 1.5s ease-in-out infinite;
       }
 
+      @keyframes heartbeat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        25% {
+          transform: scale(1.02);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        75% {
+          transform: scale(1.02);
+        }
+      }
+
+      @keyframes sparkle {
+        0%,
+        100% {
+          opacity: 0.7;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* Menu Styles */
       .menu-container {
-        gap: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-top: 40px;
+        align-items: center;
       }
 
       .menu-btn {
-        padding: 12px 24px;
-        font-size: 14px;
+        padding: 14px 32px;
+        background: linear-gradient(135deg, #f8c8dc 0%, #f5a3c4 100%);
+        border: 2px solid #f5a3c4;
+        color: white;
+        border-radius: 25px;
+        font-size: 16px;
+        font-family: "Gloria Hallelujah", cursive;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(248, 200, 220, 0.3);
+        font-weight: 600;
+      }
+
+      .menu-btn:hover {
+        transform: scale(1.05);
+        background: linear-gradient(135deg, #f5a3c4 0%, #f285b4 100%);
+        box-shadow: 0 6px 20px rgba(248, 200, 220, 0.5);
+      }
+
+      .menu-btn:active {
+        transform: scale(0.98);
       }
 
       .back-to-menu {
-        padding: 10px 20px;
-        font-size: 12px;
+        padding: 12px 24px;
+        font-size: 15px;
+        margin-top: 20px;
       }
-    }
 
-    /* Valentine Message Styles */
-    .valentine-message {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 24px;
-      padding: 30px;
-      background: linear-gradient(135deg, #ffe4f0 0%, #fff0f5 100%);
-      border-radius: 20px;
-      box-shadow: 0 8px 32px rgba(248, 200, 220, 0.3);
-      border: 2px solid #f8c8dc;
-      position: relative;
-      animation: heartbeat 2s ease-in-out infinite;
-    }
-
-    .valentine-title {
-      font-size: 32px;
-      font-family: 'Dancing Script', cursive;
-      color: #b04f78;
-      text-align: center;
-    }
-
-    .valentine-text {
-      font-size: 16px;
-      color: var(--text);
-      text-align: center;
-      line-height: 1.8;
-      max-width: 90%;
-    }
-
-    .valentine-question {
-      font-size: 28px;
-      font-family: 'Dancing Script', cursive;
-      color: #d91e63;
-      text-align: center;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    .valentine-note {
-      font-size: 15px;
-      color: var(--text);
-      text-align: center;
-      line-height: 1.8;
-      max-width: 90%;
-      font-style: italic;
-    }
-
-    .valentine-answer {
-      font-size: 18px;
-      font-family: 'Dancing Script', cursive;
-      color: #ff1493;
-      text-align: center;
-      animation: sparkle 1.5s ease-in-out infinite;
-    }
-
-    @keyframes heartbeat {
-      0%, 100% {
-        transform: scale(1);
+      /* Heart Icon Button */
+      .heart-icon-btn {
+        width: 50px;
+        height: 50px;
+        padding: 0;
+        background: linear-gradient(135deg, #f8c8dc 0%, #f5a3c4 100%);
+        border: 2px solid #f5a3c4;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(248, 200, 220, 0.3);
+        position: relative;
+        font-size: 0;
       }
-      25% {
-        transform: scale(1.02);
+
+      .heart-icon-btn::before {
+        content: "";
+        position: absolute;
+        width: 24px;
+        height: 24px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-image: url("https://cdn-icons-png.flaticon.com/512/833/833472.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
       }
-      50% {
-        transform: scale(1.05);
+
+      .heart-icon-btn:hover {
+        transform: scale(1.15);
+        background: linear-gradient(135deg, #f5a3c4 0%, #f285b4 100%);
+        box-shadow: 0 6px 20px rgba(248, 200, 220, 0.5);
       }
-      75% {
-        transform: scale(1.02);
+
+      .heart-icon-btn:active {
+        transform: scale(0.98);
       }
-    }
+    </style>
+  </head>
+  <body>
+    <video
+      id="backgroundVideo"
+      class="background-video"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+    >
+      <source src="background-video.mp4" type="video/mp4" />
+      <source src="background-video.webm" type="video/webm" />
+      Your browser does not support the video tag.
+    </video>
+    <div class="background-video-overlay" id="videoOverlay"></div>
 
-    @keyframes sparkle {
-      0%, 100% {
-        opacity: 0.7;
-      }
-      50% {
-        opacity: 1;
-      }
-    }
-
-    /* Menu Styles */
-    .menu-container {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 40px;
-      align-items: center;
-    }
-
-    .menu-btn {
-      padding: 14px 32px;
-      background: linear-gradient(135deg, #f8c8dc 0%, #f5a3c4 100%);
-      border: 2px solid #f5a3c4;
-      color: white;
-      border-radius: 25px;
-      font-size: 16px;
-      font-family: 'Gloria Hallelujah', cursive;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(248, 200, 220, 0.3);
-      font-weight: 600;
-    }
-
-    .menu-btn:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, #f5a3c4 0%, #f285b4 100%);
-      box-shadow: 0 6px 20px rgba(248, 200, 220, 0.5);
-    }
-
-    .menu-btn:active {
-      transform: scale(0.98);
-    }
-
-    .back-to-menu {
-      padding: 12px 24px;
-      font-size: 15px;
-      margin-top: 20px;
-    }
-
-    /* Heart Icon Button */
-    .heart-icon-btn {
-      width: 50px;
-      height: 50px;
-      padding: 0;
-      background: linear-gradient(135deg, #f8c8dc 0%, #f5a3c4 100%);
-      border: 2px solid #f5a3c4;
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(248, 200, 220, 0.3);
-      position: relative;
-      font-size: 0;
-    }
-
-    .heart-icon-btn::before {
-      content: '';
-      position: absolute;
-      width: 24px;
-      height: 24px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-image: url('https://cdn-icons-png.flaticon.com/512/833/833472.png');
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
-
-    .heart-icon-btn:hover {
-      transform: scale(1.15);
-      background: linear-gradient(135deg, #f5a3c4 0%, #f285b4 100%);
-      box-shadow: 0 6px 20px rgba(248, 200, 220, 0.5);
-    }
-
-    .heart-icon-btn:active {
-      transform: scale(0.98);
-    }
-  </style>
-</head>
-<body>
-<video id="backgroundVideo" class="background-video" autoplay loop muted playsinline preload="metadata">
-  <source src="background-video.mp4" type="video/mp4">
-  <source src="background-video.webm" type="video/webm">
-  Your browser does not support the video tag.
-</video>
-<div class="background-video-overlay" id="videoOverlay"></div>
-
-<div class="book-container">
-  <div class="book" id="book">
-    <div class="page active">
-      <div class="cover-title">For Kyllie 💌</div>
-      <div class="cover-sub">a little something from Han</div>
-      <div class="menu-container">
-        <button class="menu-btn" onclick="selectBook('letter')">Love Letter</button>
-        <button class="heart-icon-btn" onclick="selectBook('valentine')"></button>
-      </div>
-    </div>
-    <div class="page">
-      <img src="photo1.jpg" alt="Us" loading="eager" decoding="async">
-      <div class="caption">did you know? you're the first thought that makes my heart bloom every day 💐</div>
-    </div>
-    <div class="page">
-      <img src="photo2.JPG" alt="Love" loading="eager" decoding="async">
-      <div class="caption">every time with you feels like sunshine in spring 🌸</div>
-    </div>
-    <div class="page">
-      <img src="photo3.JPG" alt="Memory" loading="eager" decoding="async">
-      <div class="caption">and you are the masterpiece i never knew how to draw, and this is the canvas i never knew how to color 🖌️</div>
-    </div>
-    <div class="page">
-      <img src="photo4.jpg" alt="Forever" loading="eager" decoding="async">
-      <div class="caption">with you</div>
-    </div>
-      <div class="page">
-      <img src="photo7.jpg" alt="Forever" loading="eager" decoding="async">
-      <div class="caption">every moment is a petal in the bouquet of forever 🌷</div>
-    </div>
-    <div class="page">
-      <img src="photo5.jpg" alt="Laughs" loading="eager" decoding="async">
-      <div class="caption">even in the silliest or darkest moments</div>
-    </div>
-     <div class="page">
-      <img src="photo.jpg" alt="Laughs" loading="eager" decoding="async">
-      <div class="caption">your laugh and smile is the melody of my happiness 🎶</div>
-    </div>
-    <div class="page">
-      <img src="photo6.jpg" alt="Smiles" loading="eager" decoding="async">
-      <div class="caption">and at last my favorite thing, seeing you happy and exposing that sunshine of a smile 🌞</div>
-    </div>
-    <div class="page">
-      <div class="message final-message">to: my forever favorite person ❤️<br>— from Han</div>
-    </div>
-  </div>
-
-  <div class="book" id="valentineBook" style="display: none;">
-    <div class="page active">
-      <div class="cover-title">Will You Be My Valentine? 💕</div>
-      <div class="cover-sub">a question from Han's heart</div>
-      <div class="menu-container">
-        <button class="menu-btn back-to-menu" onclick="backToMenu()">← Back to Menu</button>
-      </div>
-    </div>
-    <div class="page">
-      <div class="valentine-message">
-        <div class="valentine-title">hey kyky, </div>
-        <div class="valentine-text">
-          we've been officially together for almost 3 months now, i won't say much because you already know how much i love you but.... now i want to ask you something that feels just as important.
+    <div class="book-container">
+      <div class="book" id="book">
+        <div class="page active">
+          <div class="cover-title">For Kyllie 💌</div>
+          <div class="cover-sub">a little something from Han</div>
+          <div class="menu-container">
+            <button class="menu-btn" onclick="selectBook('letter')">
+              Love Letter
+            </button>
+            <button class="menu-btn" onclick="showLetter()">Open Letter</button>
+            <button class="menu-btn" onclick="selectBook('anniversary')">
+              5th Monthsary
+            </button>
+            <button
+              class="heart-icon-btn"
+              onclick="selectBook('valentine')"
+            ></button>
+          </div>
         </div>
-        <div class="valentine-question">will you be my valentine? 💕</div>
-        <div class="valentine-note">
-        
+        <div class="page">
+          <img src="photo1.jpg" alt="Us" loading="eager" decoding="async" />
+          <div class="caption">
+            did you know? you're the first thought that makes my heart bloom
+            every day 💐
+          </div>
         </div>
-        <div class="valentine-answer">- love hawhaw</div>
+        <div class="page">
+          <img src="photo2.JPG" alt="Love" loading="eager" decoding="async" />
+          <div class="caption">
+            every time with you feels like sunshine in spring 🌸
+          </div>
+        </div>
+        <div class="page">
+          <img src="photo3.JPG" alt="Memory" loading="eager" decoding="async" />
+          <div class="caption">
+            and you are the masterpiece i never knew how to draw, and this is
+            the canvas i never knew how to color 🖌️
+          </div>
+        </div>
+        <div class="page">
+          <img
+            src="photo4.jpg"
+            alt="Forever"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="caption">with you</div>
+        </div>
+        <div class="page">
+          <img
+            src="photo7.jpg"
+            alt="Forever"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="caption">
+            every moment is a petal in the bouquet of forever 🌷
+          </div>
+        </div>
+        <div class="page">
+          <img src="photo5.jpg" alt="Laughs" loading="eager" decoding="async" />
+          <div class="caption">even in the silliest or darkest moments</div>
+        </div>
+        <div class="page">
+          <img src="photo.jpg" alt="Laughs" loading="eager" decoding="async" />
+          <div class="caption">
+            your laugh and smile is the melody of my happiness 🎶
+          </div>
+        </div>
+        <div class="page">
+          <img src="photo6.jpg" alt="Smiles" loading="eager" decoding="async" />
+          <div class="caption">
+            and at last my favorite thing, seeing you happy and exposing that
+            sunshine of a smile 🌞
+          </div>
+        </div>
+        <div class="page">
+          <div class="message final-message">
+            to: my forever favorite person ❤️<br />— from Han
+          </div>
+        </div>
+      </div>
+
+      <div class="book" id="valentineBook" style="display: none">
+        <div class="page active">
+          <div class="cover-title">Will You Be My Valentine? 💕</div>
+          <div class="cover-sub">a question from Han's heart</div>
+          <div class="menu-container">
+            <button class="menu-btn back-to-menu" onclick="backToMenu()">
+              ← Back to Menu
+            </button>
+          </div>
+        </div>
+        <div class="page">
+          <div class="valentine-message">
+            <div class="valentine-title">hey kyky,</div>
+            <div class="valentine-text">
+              we've been officially together for almost 3 months now, i won't
+              say much because you already know how much i love you but.... now
+              i want to ask you something that feels just as important.
+            </div>
+            <div class="valentine-question">will you be my valentine? 💕</div>
+            <div class="valentine-note"></div>
+            <div class="valentine-answer">- love hawhaw</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="backBtn" onclick="prevPage()">←</button>
+        <button id="nextBtn" onclick="nextPage()">→</button>
       </div>
     </div>
-  </div>
 
-  <div class="controls">
-    <button id="backBtn" onclick="prevPage()">←</button>
-    <button id="nextBtn" onclick="nextPage()">→</button>
-  </div>
-</div>
+    <div class="book notebook" id="anniversaryBook" style="display: none">
+      <div class="page notebook-page active">
+        <div class="notebook-lines"></div>
+        <div class="notebook-body" style="justify-content: center">
+          <div>
+            <div class="notebook-title">Happy 5th Monthsary</div>
+            <div class="notebook-subtitle">a little notebook for us 💕</div>
+          </div>
+          <div class="menu-container" style="margin-top: 14px">
+            <button class="menu-btn back-to-menu" onclick="backToMenu()">
+              ← Back to Menu
+            </button>
+          </div>
+        </div>
+      </div>
 
-<div class="letter-section" id="letterSection">
-  <div class="envelope" id="envelope" onclick="openEnvelope()">
-    <div class="envelope-body">
-      <div class="envelope-flap"></div>
-      <div class="envelope-seal">💌</div>
-    </div>
-  </div>
-  <div class="letter-container" id="letterContainer">
-    <div class="letter-folded" id="letterFolded" onclick="openLetter()">
-      <div class="letter-folded-content">
-        <div>📜</div>
-        <div style="margin-top: 10px;">Click to open...</div>
+      <div class="page notebook-page">
+        <div class="notebook-lines"></div>
+        <div class="notebook-body">
+          <img
+            src="./4th/IMG_4241.JPG"
+            alt="Us"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="notebook-text">
+            <p>hi baby, happy 5th monthsary.</p>
+            <p>
+              i know we can’t be together today because our schedules don’t match,
+              but please know i’m still celebrating you in every little moment i
+              get.
+            </p>
+            <p>
+              even if i can’t hold your hand today, i hope you feel my heart holding yours.
+              happy 5th, baby.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page notebook-page">
+        <div class="notebook-lines"></div>
+        <div class="notebook-body">
+          <img
+            src="./4th/IMG_4290.JPG"
+            alt="Love"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="notebook-text">
+            <p>
+              i can’t believe it’s really been 5 months since u said yes to me…
+              you’re my girlfriend…
+            </p>
+            <p>
+              i still can’t quite believe it sometimes baby... and sometimes i catch myself
+              smiling for no reason… then i realize it’s because of you 
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page notebook-page">
+        <div class="notebook-lines"></div>
+        <div class="notebook-body">
+          <img
+            src="./4th/ZVE09378.JPG"
+            alt="Favorite"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="notebook-text">
+            <p>
+              such a kind, pretty, loving, and hardworking woman like you chose
+              me and said yes to me… and i don’t take that for granted, not even
+              for a second.
+            </p>
+            <p>
+              i’m proud of you. i admire you. and i’m so, so lucky i get to love
+              you kyky ko.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page notebook-page">
+        <div class="notebook-lines"></div>
+        <div class="notebook-body">
+          <img
+            src="./4th/att.E6SNov53XxHcSAGDO_34VjpNQuZZVYkq_b0W735QmXw.JPG"
+            alt="Us"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="notebook-text">
+            <p>
+              i love you when
+              you’re laughing, you're being silly when you’re tired, when you’re overthinking, when you're crying, when you're being sungit and cold sakin when
+              you want magpa-baby, when want mo magpa-lambing, and even spicy.. and even when you’re just being you.
+            </p>
+            <p>
+              and you know i promise na i’ll keep choosing you softly, patiently, and
+              consistently.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page notebook-page">
+        <div class="notebook-lines"></div>
+        <div class="notebook-body">
+          <img
+            src="./4th/att.HoDYRfMlfQ8LoaXUJ6bN5a8WMN5rsxIxXwoPsWcbphM.JPG"
+            alt="Us"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="notebook-text">
+            <p>
+              i love the way you work hard for your dreams, the way you care,
+              and the way you make the world feel lighter just by existing.
+            </p>
+            <p>
+              if you ever forget how special you are, i’ll remind you again and
+              again and again my baby
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page notebook-page">
+        <div class="notebook-lines"></div>
+        <div class="notebook-body">
+          <img
+            src="./4th/ZVE07114.jpg"
+            alt="Love"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="notebook-text">
+            <p>
+              i still can’t quite believe i get to call you mine… but i’m so
+              grateful i do.
+            </p>
+            <p>
+              i hope you're happy baby, i'm not sure if you'll get to read it this morning or maybe after your event
+              but i really hope that you'll be happy and that you'll know how much i love you and that i'm super proud of you
+              for your event today baby! i know you will work so hard and im super proud of you.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page notebook-page">
+        <div class="notebook-lines"></div>
+        <div class="notebook-body">
+          <img
+            src="./4th/1tD2rsia.jpg"
+            alt="Favorite"
+            loading="eager"
+            decoding="async"
+          />
+          <div class="notebook-text">
+            <p>
+              happy 5th monthsary, baby. kyky. kyllie. plant master ko. i love you more than words can say.
+            </p>
+            <p>here’s to more months, more dates, more cuddles, more kisses, more memories, more us.</p>
+            <div class="notebook-signature">— Your Han <3</div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="letter-open" id="letterOpen">
-    <div class="letter-content" id="letterContent">
-my dearest kyky,
 
-as this new year begins, i just want to pause for a moment and put into words everything my heart has been carrying for you. hindi ko man palaging nasasabi ng maayos, i hope this letter shows you how deeply, genuinely, and sincerely i love you. kyky, loving you feels so natural. parang kahit magkaiba tayo ng mundo, magkaiba ng ugali, magkaiba ng paraan ng pag iisip, somehow we meet in the middle. we are two totally different people, yet when i am with you, it feels like i am exactly where i am supposed to be. parang soulmate kind of connection. yung hindi kailangang ipilit, hindi kailangang ipaliwanag. it just feels right. one of the things i admire most about you is your strength. hindi lang yung strength na nakikita ng iba, but the quiet strength you carry even on days when you feel tired, insecure, or unsure of yourself. you still show up. you still try. you still lead. and that strength inspires me more than you will ever know. you do not just lead others, you unknowingly lead my heart too. and that smile of yours, kyky, grabe. it is the kind of smile that instantly softens everything inside me. kahit pagod ako, kahit mabigat ang araw ko, one smile from you makes everything feel lighter. i hope you know that your smile is beautiful, not because it is perfect, but because it is yours.
-i also love how natural your leadership is. you do not force it. people just follow you because you care, because you are genuine, because you have a heart that wants to do better, not just for yourself but for others. seeing you step up, guide, and care for the people around you makes me fall for you over and over again. i know recently you have been struggling, especially with your breakouts. i know it makes you feel less confident, less beautiful, and less like yourself. but kyky, please listen to me when i say this. you are still you. still beautiful. still lovable. still more than enough. your worth has never been tied to your skin, your flaws, or the things you are insecure about. i fell in love with you, your heart, your soul, your laugh, your strength, not perfection. we have only been officially together for a month and a half since you sagot me, but it already feels like we have been through so much together. one of the hardest moments for me was seeing you doubt yourself. feeling like you did not deserve my love and almost walking away because you could not see what i see in you. that moment hurt, not because i was angry, but because i wished i could take all that self doubt away from you and show you how deeply loved you are. if you ever feel that way again, please remember this. i choose you. i choose you even on days you do not choose yourself. i choose you even when you feel unworthy. i choose you not because you are perfect, but because you are real. and real love stays. and then there are the moments that feel so warm and safe. our cuddle time when the world feels quiet and it is just us. our baking date, laughing, messing up, and enjoying each other’s presence. those simple moments mean everything to me. they are the kind of memories i want to keep collecting with you, not just this year but for many years to come. this new year, kyky, i want you to know that you are not walking into it alone. i am here, ready to love you, support you, reassure you, and grow with you. i promise to be patient when you doubt yourself, gentle when you are hurting, and playful when you need joy. i promise to remind you of your worth when you forget it, and to hold your hand through both good days and bad ones.
-
- as we step into this new year, my wish is simple. more laughter, more cuddles, more late talks, more baking dates, more growth, and more love together. i do not know what the future holds, but i know i want to face it with you.
-
- kyky, thank you for choosing me. thank you for staying, for trying, for loving, and for being you. i promise to keep choosing you too, today, tomorrow, and in all the days that follow.
-
-i love you always, my plant master.
-      <div class="letter-signature">— Han ❤️</div>
+    <div class="letter-section" id="letterSection">
+      <div class="envelope" id="envelope" onclick="openEnvelope()">
+        <div class="envelope-body">
+          <div class="envelope-flap"></div>
+          <div class="envelope-seal">💌</div>
+        </div>
+      </div>
+      <div class="letter-container" id="letterContainer">
+        <div class="letter-folded" id="letterFolded" onclick="openLetter()">
+          <div class="letter-folded-content">
+            <div>📜</div>
+            <div style="margin-top: 10px">Click to open...</div>
+          </div>
+        </div>
+      </div>
+      <div class="letter-open" id="letterOpen">
+        <div class="letter-content" id="letterContent">
+          my dearest kyky, as this new year begins, i just want to pause for a
+          moment and put into words everything my heart has been carrying for
+          you. hindi ko man palaging nasasabi ng maayos, i hope this letter
+          shows you how deeply, genuinely, and sincerely i love you. kyky,
+          loving you feels so natural. parang kahit magkaiba tayo ng mundo,
+          magkaiba ng ugali, magkaiba ng paraan ng pag iisip, somehow we meet in
+          the middle. we are two totally different people, yet when i am with
+          you, it feels like i am exactly where i am supposed to be. parang
+          soulmate kind of connection. yung hindi kailangang ipilit, hindi
+          kailangang ipaliwanag. it just feels right. one of the things i admire
+          most about you is your strength. hindi lang yung strength na nakikita
+          ng iba, but the quiet strength you carry even on days when you feel
+          tired, insecure, or unsure of yourself. you still show up. you still
+          try. you still lead. and that strength inspires me more than you will
+          ever know. you do not just lead others, you unknowingly lead my heart
+          too. and that smile of yours, kyky, grabe. it is the kind of smile
+          that instantly softens everything inside me. kahit pagod ako, kahit
+          mabigat ang araw ko, one smile from you makes everything feel lighter.
+          i hope you know that your smile is beautiful, not because it is
+          perfect, but because it is yours. i also love how natural your
+          leadership is. you do not force it. people just follow you because you
+          care, because you are genuine, because you have a heart that wants to
+          do better, not just for yourself but for others. seeing you step up,
+          guide, and care for the people around you makes me fall for you over
+          and over again. i know recently you have been struggling, especially
+          with your breakouts. i know it makes you feel less confident, less
+          beautiful, and less like yourself. but kyky, please listen to me when
+          i say this. you are still you. still beautiful. still lovable. still
+          more than enough. your worth has never been tied to your skin, your
+          flaws, or the things you are insecure about. i fell in love with you,
+          your heart, your soul, your laugh, your strength, not perfection. we
+          have only been officially together for a month and a half since you
+          sagot me, but it already feels like we have been through so much
+          together. one of the hardest moments for me was seeing you doubt
+          yourself. feeling like you did not deserve my love and almost walking
+          away because you could not see what i see in you. that moment hurt,
+          not because i was angry, but because i wished i could take all that
+          self doubt away from you and show you how deeply loved you are. if you
+          ever feel that way again, please remember this. i choose you. i choose
+          you even on days you do not choose yourself. i choose you even when
+          you feel unworthy. i choose you not because you are perfect, but
+          because you are real. and real love stays. and then there are the
+          moments that feel so warm and safe. our cuddle time when the world
+          feels quiet and it is just us. our baking date, laughing, messing up,
+          and enjoying each other’s presence. those simple moments mean
+          everything to me. they are the kind of memories i want to keep
+          collecting with you, not just this year but for many years to come.
+          this new year, kyky, i want you to know that you are not walking into
+          it alone. i am here, ready to love you, support you, reassure you, and
+          grow with you. i promise to be patient when you doubt yourself, gentle
+          when you are hurting, and playful when you need joy. i promise to
+          remind you of your worth when you forget it, and to hold your hand
+          through both good days and bad ones. as we step into this new year, my
+          wish is simple. more laughter, more cuddles, more late talks, more
+          baking dates, more growth, and more love together. i do not know what
+          the future holds, but i know i want to face it with you. kyky, thank
+          you for choosing me. thank you for staying, for trying, for loving,
+          and for being you. i promise to keep choosing you too, today,
+          tomorrow, and in all the days that follow. i love you always, my plant
+          master.
+          <div class="letter-signature">— Han ❤️</div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<script>
-  let current = 0;
-  let currentBook = 'menu'; // 'menu', 'letter', or 'valentine'
-  let letterBook = null;
-  let valentineBook = null;
-  let letterPages = null;
-  let valentinePages = null;
-  
-  const nextBtn = document.getElementById('nextBtn');
-  const backBtn = document.getElementById('backBtn');
+    <div class="letter-section" id="anniversaryLetterSection">
+      <div
+        class="envelope"
+        id="anniversaryEnvelope"
+        onclick="openAnniversaryEnvelope()"
+      >
+        <div class="envelope-body">
+          <div class="envelope-flap"></div>
+          <div class="envelope-seal">💖</div>
+        </div>
+      </div>
+      <div class="letter-container" id="anniversaryLetterContainer">
+        <div
+          class="letter-folded"
+          id="anniversaryLetterFolded"
+          onclick="openAnniversaryLetter()"
+        >
+          <div class="letter-folded-content">
+            <div>📜</div>
+            <div style="margin-top: 10px">A special note...</div>
+          </div>
+        </div>
+      </div>
+      <div class="letter-open" id="anniversaryLetterOpen">
+        <div class="letter-content">
+          hi baby, happy 5th monthsary. i know we can't we be together today due
+          to our conflicting schedules but i just wanna say today na happy 5th
+          baby! i can't believe it's really been 5 months since u said yes to
+          me.. you're my girlfriend.. i still can't quite believe it baby. such
+          a kind, pretty, loving, and hardworking woman like you chose me and
+          said yes to me.
+          <div class="letter-signature">— Your Han ❤️</div>
+        </div>
+      </div>
+    </div>
 
-  const book = document.getElementById('book');
-  const controls = document.querySelector('.controls');
-  const letterSection = document.getElementById('letterSection');
-  
-  // Cache DOM elements for letter section
-  const envelope = document.getElementById('envelope');
-  const letterContainer = document.getElementById('letterContainer');
-  const letterFolded = document.getElementById('letterFolded');
-  const letterOpen = document.getElementById('letterOpen');
-  const backgroundVideo = document.getElementById('backgroundVideo');
-  const videoOverlay = document.getElementById('videoOverlay');
-  
-  // Initialize books
-  function initializeBooks() {
-    letterBook = document.getElementById('book');
-    valentineBook = document.getElementById('valentineBook');
-    letterPages = letterBook.querySelectorAll('.page');
-    valentinePages = valentineBook.querySelectorAll('.page');
-  }
-  
-  // Preload all images immediately
-  const imageSources = ['photo1.jpg', 'photo2.JPG', 'photo3.JPG', 'photo4.jpg', 'photo5.jpg', 'photo6.jpg', 'photo7.jpg', 'photo.jpg'];
-  imageSources.forEach(src => {
-    const img = new Image();
-    img.src = src;
-  });
+    <script>
+      let current = 0;
+      let currentBook = "menu"; // 'menu', 'letter', or 'valentine'
+      let letterBook = null;
+      let valentineBook = null;
+      let anniversaryBook = null;
+      let letterPages = null;
+      let valentinePages = null;
+      let anniversaryPages = null;
 
-  function selectBook(bookType) {
-    if (bookType === 'letter') {
-      currentBook = 'letter';
-      current = 1; // Skip the menu page
-      letterBook.style.display = 'block';
-      valentineBook.style.display = 'none';
-      showPage(current, 'letter');
-    } else if (bookType === 'valentine') {
-      currentBook = 'valentine';
-      current = 1; // Skip the menu page
-      letterBook.style.display = 'none';
-      valentineBook.style.display = 'block';
-      showPage(current, 'valentine');
-    }
-  }
+      const nextBtn = document.getElementById("nextBtn");
+      const backBtn = document.getElementById("backBtn");
 
-  function backToMenu() {
-    currentBook = 'menu';
-    current = 0;
-    letterBook.style.display = 'block';
-    valentineBook.style.display = 'none';
-    showPage(0, 'letter');
-  }
+      const book = document.getElementById("book");
+      const controls = document.querySelector(".controls");
+      const letterSection = document.getElementById("letterSection");
 
-  function showPage(index, bookType = currentBook) {
-    // Use requestAnimationFrame for smoother transitions
-    requestAnimationFrame(() => {
-      let pages, lastPageIndex;
-      
-      if (bookType === 'valentine') {
-        pages = valentinePages;
-        lastPageIndex = valentinePages.length - 1;
-      } else {
-        pages = letterPages;
-        lastPageIndex = letterPages.length - 1;
+      // Cache DOM elements for letter section
+      const envelope = document.getElementById("envelope");
+      const letterContainer = document.getElementById("letterContainer");
+      const letterFolded = document.getElementById("letterFolded");
+      const letterOpen = document.getElementById("letterOpen");
+      const backgroundVideo = document.getElementById("backgroundVideo");
+      const videoOverlay = document.getElementById("videoOverlay");
+      const anniversaryLetterSection = document.getElementById(
+        "anniversaryLetterSection"
+      );
+
+      // Initialize books
+      function initializeBooks() {
+        letterBook = document.getElementById("book");
+        valentineBook = document.getElementById("valentineBook");
+        anniversaryBook = document.getElementById("anniversaryBook");
+        letterPages = letterBook.querySelectorAll(".page");
+        valentinePages = valentineBook.querySelectorAll(".page");
+        anniversaryPages = anniversaryBook.querySelectorAll(".page");
       }
 
-      pages.forEach((page, i) => {
-        page.classList.remove('active');
-        if (i <= index) {
-          page.style.transform = 'rotateY(0deg)';
-          page.style.zIndex = i + 1;
-        } else {
-          page.style.transform = 'rotateY(180deg)';
-          page.style.zIndex = pages.length - i;
-        }
+      // Preload all images immediately
+      const imageSources = [
+        "photo1.jpg",
+        "photo2.JPG",
+        "photo3.JPG",
+        "photo4.jpg",
+        "photo5.jpg",
+        "photo6.jpg",
+        "photo7.jpg",
+        "photo.jpg",
+        "./4th/IMG_4241.JPG",
+        "./4th/IMG_4290.JPG",
+        "./4th/ZVE07114.jpg",
+        "./4th/ZVE09378.JPG",
+        "./4th/1tD2rsia.jpg",
+        "./4th/att.7bp0OuHBL2TDhhnut5V-VqoL2h8LS63ulbsCse-gxa4.JPG",
+        "./4th/att.E6SNov53XxHcSAGDO_34VjpNQuZZVYkq_b0W735QmXw.JPG",
+        "./4th/att.HoDYRfMlfQ8LoaXUJ6bN5a8WMN5rsxIxXwoPsWcbphM.JPG",
+      ];
+      imageSources.forEach((src) => {
+        const img = new Image();
+        img.src = src;
       });
-      pages[index].classList.add('active');
 
-      backBtn.disabled = (index === 0 && bookType !== 'valentine') || (index === 0 && bookType === 'valentine');
-      nextBtn.disabled = index === lastPageIndex;
-
-      // Hide book and show letter section on last page of letter book
-      if (index === lastPageIndex && bookType === 'letter') {
-        setTimeout(() => {
-          letterBook.classList.add('hidden');
-          controls.classList.add('hidden');
-          letterSection.classList.add('show');
-          triggerConfetti();
-        }, 300);
-      } else if (index === lastPageIndex && bookType === 'valentine') {
-        // For valentine book, just disable next button
-        letterBook.classList.remove('hidden');
-        controls.classList.remove('hidden');
-        letterSection.classList.remove('show');
-      } else {
-        letterBook.classList.remove('hidden');
-        controls.classList.remove('hidden');
-        letterSection.classList.remove('show');
-        
-        // Reset letter state when navigating away from last page
-        envelope.classList.remove('open');
-        letterContainer.classList.remove('show');
-        letterFolded.style.display = 'block';
-        letterOpen.classList.remove('show');
-        envelopeOpened = false;
-        letterOpened = false;
-        
-        // Hide and pause background video
-        if (backgroundVideo) {
-          backgroundVideo.classList.remove('show');
-          videoOverlay.classList.remove('show');
-          backgroundVideo.pause();
+      function selectBook(bookType) {
+        if (bookType === "letter") {
+          currentBook = "letter";
+          current = 1; // Skip the menu page
+          letterBook.style.display = "block";
+          valentineBook.style.display = "none";
+          anniversaryBook.style.display = "none";
+          showPage(current, "letter");
+        } else if (bookType === "valentine") {
+          currentBook = "valentine";
+          current = 1; // Skip the menu page
+          letterBook.style.display = "none";
+          valentineBook.style.display = "block";
+          anniversaryBook.style.display = "none";
+          showPage(current, "valentine");
+        } else if (bookType === "anniversary") {
+          currentBook = "anniversary";
+          current = 1; // Skip the menu page
+          letterBook.style.display = "none";
+          valentineBook.style.display = "none";
+          anniversaryBook.style.display = "block";
+          showPage(current, "anniversary");
         }
       }
-    });
-  }
 
-  function nextPage() {
-    let pages;
-    if (currentBook === 'valentine') {
-      pages = valentinePages;
-      if (current < pages.length - 1) {
-        current++;
-        showPage(current, 'valentine');
+      function backToMenu() {
+        currentBook = "menu";
+        current = 0;
+        letterBook.style.display = "block";
+        valentineBook.style.display = "none";
+        anniversaryBook.style.display = "none";
+        showPage(0, "letter");
       }
-    } else {
-      pages = letterPages;
-      if (current < pages.length - 1) {
-        current++;
-        showPage(current, 'letter');
-      }
-    }
-  }
 
-  function prevPage() {
-    if (current > 0) {
-      current--;
-      if (currentBook === 'valentine') {
-        showPage(current, 'valentine');
-      } else {
-        showPage(current, 'letter');
-      }
-    }
-  }
-  
-  // Preload video when page loads
-  if (backgroundVideo) {
-    backgroundVideo.load();
-  }
+      function showPage(index, bookType = currentBook) {
+        // Use requestAnimationFrame for smoother transitions
+        requestAnimationFrame(() => {
+          let pages, lastPageIndex;
 
-  function createFloatingElements(type, count) {
-    for (let i = 0; i < count; i++) {
-      const el = document.createElement('div');
-      el.className = type;
-      el.style.left = Math.random() * 100 + 'vw';
-      el.style.top = 100 + Math.random() * 200 + 'vh';
-      el.style.animationDuration = (8 + Math.random() * 5) + 's';
-      el.style.opacity = 0.3 + Math.random() * 0.7;
-      el.style.transform = `rotate(${Math.random() * 360}deg)`;
-      document.body.appendChild(el);
-    }
-  }
+          if (bookType === "valentine") {
+            pages = valentinePages;
+            lastPageIndex = valentinePages.length - 1;
+          } else if (bookType === "anniversary") {
+            pages = anniversaryPages;
+            lastPageIndex = anniversaryPages.length - 1;
+          } else {
+            pages = letterPages;
+            lastPageIndex = letterPages.length - 1;
+          }
 
-  function triggerConfetti() {
-    for (let i = 0; i < 60; i++) {
-      const confetti = document.createElement('div');
-      confetti.className = 'floating-sparkle';
-      confetti.style.left = Math.random() * 100 + 'vw';
-      confetti.style.top = '-10vh';
-      confetti.style.animationDuration = (4 + Math.random() * 3) + 's'; 
-      confetti.style.opacity = 0.6 + Math.random() * 0.4;
-      document.body.appendChild(confetti);
-    }
-  }
+          pages.forEach((page, i) => {
+            page.classList.remove("active");
+            if (i <= index) {
+              page.style.transform = "rotateY(0deg)";
+              page.style.zIndex = i + 1;
+            } else {
+              page.style.transform = "rotateY(180deg)";
+              page.style.zIndex = pages.length - i;
+            }
+          });
+          pages[index].classList.add("active");
 
-  function playWill() {
-    const willAudio = document.getElementById('willAudio');
-    willAudio.play();
-  }
+          backBtn.disabled =
+            (index === 0 && bookType !== "valentine") ||
+            (index === 0 && bookType === "valentine") ||
+            (index === 0 && bookType === "anniversary");
+          nextBtn.disabled = index === lastPageIndex;
 
-  function pauseWill() {
-    const willAudio = document.getElementById('willAudio');
-    willAudio.pause();
-  }
+          // Hide book and show letter section on last page of letter book
+          if (index === lastPageIndex && bookType === "letter") {
+            setTimeout(() => {
+              letterBook.classList.add("hidden");
+              controls.classList.add("hidden");
+              letterSection.classList.add("show");
+              triggerConfetti();
+            }, 300);
+          } else if (index === lastPageIndex && bookType === "valentine") {
+            // For valentine book, just disable next button
+            letterBook.classList.remove("hidden");
+            controls.classList.remove("hidden");
+            letterSection.classList.remove("show");
+          } else if (index === lastPageIndex && bookType === "anniversary") {
+            // Keep the monthsary experience inside the notebook (no envelope swap)
+            letterBook.classList.remove("hidden");
+            controls.classList.remove("hidden");
+            anniversaryLetterSection.classList.remove("show");
+          } else {
+            letterBook.classList.remove("hidden");
+            controls.classList.remove("hidden");
+            letterSection.classList.remove("show");
+            anniversaryLetterSection.classList.remove("show");
 
-  // Letter functionality
-  let envelopeOpened = false;
-  let letterOpened = false;
+            // Reset letter state when navigating away from last page
+            envelope.classList.remove("open");
+            letterContainer.classList.remove("show");
+            letterFolded.style.display = "block";
+            letterOpen.classList.remove("show");
+            envelopeOpened = false;
+            letterOpened = false;
 
-  function openEnvelope() {
-    if (envelopeOpened) return;
-    
-    envelope.classList.add('open');
-    setTimeout(() => {
-      letterContainer.classList.add('show');
-      envelopeOpened = true;
-      triggerConfetti();
-      
-      // Show and play background video
-      if (backgroundVideo) {
-        backgroundVideo.classList.add('show');
-        videoOverlay.classList.add('show');
-        backgroundVideo.play().catch(e => {
-          console.log('Video autoplay prevented:', e);
+            // Hide and pause background video
+            if (backgroundVideo) {
+              backgroundVideo.classList.remove("show");
+              videoOverlay.classList.remove("show");
+              backgroundVideo.pause();
+            }
+          }
         });
       }
-    }, 200);
-  }
 
-  function openLetter() {
-    if (letterOpened) return;
-    
-    letterFolded.style.display = 'none';
-    letterOpen.classList.add('show');
-    letterOpened = true;
-    triggerConfetti();
-  }
+      function nextPage() {
+        let pages;
+        if (currentBook === "valentine") {
+          pages = valentinePages;
+          if (current < pages.length - 1) {
+            current++;
+            showPage(current, "valentine");
+          }
+        } else if (currentBook === "anniversary") {
+          pages = anniversaryPages;
+          if (current < pages.length - 1) {
+            current++;
+            showPage(current, "anniversary");
+          }
+        } else {
+          pages = letterPages;
+          if (current < pages.length - 1) {
+            current++;
+            showPage(current, "letter");
+          }
+        }
+      }
 
-  initializeBooks();
-  showPage(current, 'letter');
-  createFloatingElements('floating-heart', 8);
-  createFloatingElements('floating-petal', 10);
-  createFloatingElements('floating-butterfly', 6);
-</script>
-</body>
+      function prevPage() {
+        if (current > 0) {
+          current--;
+          if (currentBook === "valentine") {
+            showPage(current, "valentine");
+          } else if (currentBook === "anniversary") {
+            showPage(current, "anniversary");
+          } else {
+            showPage(current, "letter");
+          }
+        }
+      }
+
+      function showLetter() {
+        letterBook.classList.add("hidden");
+        controls.classList.add("hidden");
+        letterSection.classList.add("show");
+        triggerConfetti();
+      }
+
+      // Preload video when page loads
+      if (backgroundVideo) {
+        backgroundVideo.load();
+      }
+
+      function createFloatingElements(type, count) {
+        for (let i = 0; i < count; i++) {
+          const el = document.createElement("div");
+          el.className = type;
+          el.style.left = Math.random() * 100 + "vw";
+          el.style.top = 100 + Math.random() * 200 + "vh";
+          el.style.animationDuration = 8 + Math.random() * 5 + "s";
+          el.style.opacity = 0.3 + Math.random() * 0.7;
+          el.style.transform = `rotate(${Math.random() * 360}deg)`;
+          document.body.appendChild(el);
+        }
+      }
+
+      function triggerConfetti() {
+        for (let i = 0; i < 60; i++) {
+          const confetti = document.createElement("div");
+          confetti.className = "floating-sparkle";
+          confetti.style.left = Math.random() * 100 + "vw";
+          confetti.style.top = "-10vh";
+          confetti.style.animationDuration = 4 + Math.random() * 3 + "s";
+          confetti.style.opacity = 0.6 + Math.random() * 0.4;
+          document.body.appendChild(confetti);
+        }
+      }
+
+      function playWill() {
+        const willAudio = document.getElementById("willAudio");
+        willAudio.play();
+      }
+
+      function pauseWill() {
+        const willAudio = document.getElementById("willAudio");
+        willAudio.pause();
+      }
+
+      // Letter functionality
+      let envelopeOpened = false;
+      let letterOpened = false;
+
+      function openEnvelope() {
+        if (envelopeOpened) return;
+
+        envelope.classList.add("open");
+        setTimeout(() => {
+          letterContainer.classList.add("show");
+          envelopeOpened = true;
+          triggerConfetti();
+
+          // Show and play background video
+          if (backgroundVideo) {
+            backgroundVideo.classList.add("show");
+            videoOverlay.classList.add("show");
+            backgroundVideo.play().catch((e) => {
+              console.log("Video autoplay prevented:", e);
+            });
+          }
+        }, 200);
+      }
+
+      function openLetter() {
+        if (letterOpened) return;
+
+        letterFolded.style.display = "none";
+        letterOpen.classList.add("show");
+        letterOpened = true;
+        triggerConfetti();
+      }
+
+      let anniversaryEnvelopeOpened = false;
+      let anniversaryLetterOpened = false;
+
+      function openAnniversaryEnvelope() {
+        if (anniversaryEnvelopeOpened) return;
+        document.getElementById("anniversaryEnvelope").classList.add("open");
+        setTimeout(() => {
+          document
+            .getElementById("anniversaryLetterContainer")
+            .classList.add("show");
+          anniversaryEnvelopeOpened = true;
+          triggerConfetti();
+          if (backgroundVideo) {
+            backgroundVideo.classList.add("show");
+            videoOverlay.classList.add("show");
+            backgroundVideo
+              .play()
+              .catch((e) => console.log("Video autoplay prevented:", e));
+          }
+        }, 200);
+      }
+
+      function openAnniversaryLetter() {
+        if (anniversaryLetterOpened) return;
+        document.getElementById("anniversaryLetterFolded").style.display =
+          "none";
+        document.getElementById("anniversaryLetterOpen").classList.add("show");
+        anniversaryLetterOpened = true;
+        triggerConfetti();
+      }
+
+      initializeBooks();
+      showPage(current, "letter");
+      createFloatingElements("floating-heart", 8);
+      createFloatingElements("floating-petal", 10);
+      createFloatingElements("floating-butterfly", 6);
+    </script>
+  </body>
 </html>
