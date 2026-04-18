@@ -42,6 +42,10 @@
       rel="stylesheet"
     />
     <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2270%22>❤️</text></svg>"
     />
@@ -56,6 +60,10 @@
 
       * {
         box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
       }
 
       body {
@@ -284,6 +292,848 @@
         font-weight: 700;
         color: #b04f78;
         text-align: right;
+      }
+
+      /* 6th monthsary — Kuromi-inspired polaroid scrapbook */
+      .book.polaroid-kuromi {
+        max-width: 420px;
+        height: 580px;
+      }
+
+      .book.polaroid-kuromi .page {
+        border: none;
+        border-radius: 20px;
+        background: linear-gradient(
+          165deg,
+          #2d2640 0%,
+          #1a1528 45%,
+          #251d38 100%
+        );
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45),
+          inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+      }
+
+      .book.polaroid-kuromi .page::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image: radial-gradient(
+            circle at 20% 30%,
+            rgba(184, 164, 224, 0.12) 0%,
+            transparent 45%
+          ),
+          radial-gradient(
+            circle at 80% 70%,
+            rgba(255, 105, 180, 0.08) 0%,
+            transparent 40%
+          ),
+          repeating-linear-gradient(
+            -12deg,
+            transparent,
+            transparent 18px,
+            rgba(255, 255, 255, 0.02) 18px,
+            rgba(255, 255, 255, 0.02) 19px
+          );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .kuromi-page-inner {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 18px 16px 16px;
+        text-align: center;
+      }
+
+      .kuromi-page-inner.kuromi-cover {
+        justify-content: flex-start;
+      }
+
+      .kuromi-cover-top {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 0;
+      }
+
+      /* Pinned nav inside 6th book: arrows above “Back to Menu” */
+      #sixthBook .sixth-bottom-stack {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 90;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 12px 20px;
+        pointer-events: none;
+      }
+
+      #sixthBook .sixth-bottom-stack .controls,
+      #sixthBook .sixth-bottom-stack .menu-container,
+      #sixthBook .sixth-bottom-stack button {
+        pointer-events: auto;
+      }
+
+      #sixthBook .sixth-nav-slot {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        min-height: 44px;
+      }
+
+      #sixthBook .sixth-nav-slot .controls {
+        margin-top: 0;
+        gap: 14px;
+      }
+
+      #sixthBook .sixth-nav-slot #backBtn,
+      #sixthBook .sixth-nav-slot #nextBtn {
+        background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+        box-shadow: 0 6px 18px rgba(124, 58, 237, 0.45);
+      }
+
+      #sixthBook .sixth-nav-slot #backBtn:hover,
+      #sixthBook .sixth-nav-slot #nextBtn:hover {
+        filter: brightness(1.08);
+      }
+
+      #sixthBook:not(.sixth-on-cover) #sixthBackWrap {
+        display: none;
+      }
+
+      #sixthBook .kuromi-back-menu {
+        margin-top: 0;
+        padding-bottom: 2px;
+      }
+
+      .book.polaroid-kuromi .page .kuromi-page-inner {
+        padding-bottom: 108px;
+      }
+
+      .kuromi-deco {
+        font-size: 13px;
+        letter-spacing: 0.15em;
+        color: #c4b5e0;
+        margin-bottom: 6px;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 600;
+      }
+
+      .kuromi-title {
+        font-family: "Quicksand", sans-serif;
+        font-weight: 700;
+        font-size: 22px;
+        color: #f0e8ff;
+        text-shadow: 0 2px 0 #1a1528, 0 0 24px rgba(236, 72, 153, 0.35);
+        margin-bottom: 4px;
+      }
+
+      .kuromi-sub {
+        font-size: 14px;
+        color: #e9d5ff;
+        opacity: 0.92;
+        font-family: "Quicksand", sans-serif;
+        margin-bottom: 12px;
+      }
+
+      .polaroid-block {
+        flex: 0 1 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 0;
+        /* room so tilt/shadow doesn’t paint over the text below */
+        margin-bottom: 20px;
+        padding-bottom: 6px;
+      }
+
+      .polaroid-frame {
+        background: #faf7ff;
+        padding: 10px 10px 14px;
+        border-radius: 4px;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35),
+          0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+        max-width: 100%;
+        position: relative;
+        /* keep rotated frame from overlapping siblings in the flex column */
+        margin-bottom: 4px;
+      }
+
+      .polaroid-tilt-left {
+        transform: rotate(-1.4deg);
+      }
+
+      .polaroid-tilt-right {
+        transform: rotate(1.4deg);
+      }
+
+      .polaroid-tape {
+        position: absolute;
+        width: 44px;
+        height: 16px;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%) rotate(-2deg);
+        background: linear-gradient(
+          90deg,
+          rgba(236, 72, 153, 0.85),
+          rgba(244, 114, 182, 0.95)
+        );
+        border-radius: 2px;
+        opacity: 0.92;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      .polaroid-frame img {
+        display: block;
+        width: 100%;
+        max-width: 280px;
+        height: min(180px, 42vh);
+        object-fit: cover;
+        border-radius: 2px;
+        border: 2px solid #1a1528;
+      }
+
+      .polaroid-stripe {
+        margin-top: 10px;
+        min-height: 36px;
+        font-family: "Quicksand", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        color: #4a3f63;
+        line-height: 1.35;
+      }
+
+      .kuromi-scrap-text {
+        margin-top: 4px;
+        padding-top: 12px;
+        text-align: left;
+        font-size: 14px;
+        line-height: 1.75;
+        color: #ede9fe;
+        overflow: auto;
+        flex: 1 1 auto;
+        min-height: 0;
+        max-height: 150px;
+        padding-left: 4px;
+        padding-right: 4px;
+        position: relative;
+        z-index: 2;
+        scroll-behavior: smooth;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(167, 139, 250, 0.5) transparent;
+      }
+
+      .kuromi-scrap-text::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .kuromi-scrap-text::-webkit-scrollbar-thumb {
+        background: rgba(167, 139, 250, 0.45);
+        border-radius: 6px;
+      }
+
+      .kuromi-scrap-text::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      .kuromi-scrap-text p {
+        margin: 0 0 10px 0;
+      }
+
+      .kuromi-signature {
+        margin-top: 8px;
+        text-align: right;
+        font-family: "Quicksand", sans-serif;
+        font-weight: 700;
+        font-size: 14px;
+        color: #f9a8d4;
+      }
+
+      .menu-btn.kuromi-menu-btn {
+        background: linear-gradient(135deg, #7c3aed 0%, #db2777 100%);
+        box-shadow: 0 6px 20px rgba(124, 58, 237, 0.45);
+      }
+
+      .menu-btn.kuromi-menu-btn:hover {
+        filter: brightness(1.08);
+      }
+
+      /* Floating “stickers” + sparkles (Kuromi vibe — generic cute, not official art) */
+      .kuromi-sticker-layer {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .kuromi-page-inner > *:not(.kuromi-sticker-layer) {
+        position: relative;
+        z-index: 1;
+      }
+
+      .kuromi-sticker {
+        position: absolute;
+        font-size: clamp(22px, 5.5vw, 30px);
+        line-height: 1;
+        filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+        opacity: 0.88;
+        user-select: none;
+      }
+
+      .kuromi-sticker--1 {
+        top: 6%;
+        left: 6%;
+        animation: kuromi-float-a 4.2s ease-in-out infinite;
+      }
+
+      .kuromi-sticker--2 {
+        top: 10%;
+        right: 8%;
+        animation: kuromi-float-b 3.6s ease-in-out infinite 0.4s;
+      }
+
+      .kuromi-sticker--3 {
+        bottom: 14%;
+        left: 10%;
+        animation: kuromi-wiggle 2.8s ease-in-out infinite;
+      }
+
+      .kuromi-sticker--4 {
+        bottom: 18%;
+        right: 12%;
+        animation: kuromi-float-a 3.9s ease-in-out infinite 0.7s;
+      }
+
+      .kuromi-sticker--5 {
+        top: 42%;
+        right: 4%;
+        font-size: clamp(18px, 4vw, 24px);
+        animation: kuromi-float-b 4.5s ease-in-out infinite 0.2s;
+      }
+
+      .kuromi-sticker--6 {
+        top: 38%;
+        left: 4%;
+        font-size: clamp(18px, 4vw, 24px);
+        animation: kuromi-float-a 3.2s ease-in-out infinite 1s;
+      }
+
+      .kuromi-sparkle {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #f9a8d4;
+        box-shadow: 0 0 10px 2px rgba(236, 72, 153, 0.65);
+        animation: kuromi-twinkle 2.2s ease-in-out infinite;
+      }
+
+      .kuromi-sparkle--1 {
+        top: 22%;
+        left: 22%;
+        animation-delay: 0s;
+      }
+
+      .kuromi-sparkle--2 {
+        top: 55%;
+        right: 18%;
+        background: #c4b5fd;
+        box-shadow: 0 0 10px 2px rgba(167, 139, 250, 0.7);
+        animation-delay: 0.6s;
+      }
+
+      .kuromi-sparkle--3 {
+        bottom: 28%;
+        left: 38%;
+        animation-delay: 1.1s;
+      }
+
+      @keyframes kuromi-float-a {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-6deg);
+        }
+        50% {
+          transform: translateY(-10px) rotate(4deg);
+        }
+      }
+
+      @keyframes kuromi-float-b {
+        0%,
+        100% {
+          transform: translateY(0) rotate(5deg);
+        }
+        50% {
+          transform: translateY(8px) rotate(-5deg);
+        }
+      }
+
+      @keyframes kuromi-wiggle {
+        0%,
+        100% {
+          transform: rotate(-8deg) scale(1);
+        }
+        50% {
+          transform: rotate(10deg) scale(1.06);
+        }
+      }
+
+      @keyframes kuromi-twinkle {
+        0%,
+        100% {
+          opacity: 0.25;
+          transform: scale(0.7);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.15);
+        }
+      }
+
+      @keyframes kuromi-polaroid-pop {
+        0% {
+          opacity: 0;
+          transform: scale(0.92) rotate(var(--tilt, -1.4deg));
+        }
+        70% {
+          opacity: 1;
+          transform: scale(1.02) rotate(var(--tilt, -1.4deg));
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1) rotate(var(--tilt, -1.4deg));
+        }
+      }
+
+      .book.polaroid-kuromi .page.active .polaroid-frame {
+        animation: kuromi-polaroid-pop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1)
+          both;
+      }
+
+      .book.polaroid-kuromi .page.active .polaroid-tilt-left {
+        --tilt: -1.4deg;
+      }
+
+      .book.polaroid-kuromi .page.active .polaroid-tilt-right {
+        --tilt: 1.4deg;
+      }
+
+      /* Extra floating shapes behind the whole 6th book */
+      #sixthBook {
+        position: relative;
+        --kuromi-tilt-x: 0deg;
+        --kuromi-tilt-y: 0deg;
+        transform: perspective(1100px) rotateX(var(--kuromi-tilt-y))
+          rotateY(var(--kuromi-tilt-x));
+        transition: opacity 0.3s ease, transform 0.22s ease-out;
+      }
+
+      /* Soft floating dots — depth without blocking taps */
+      .kuromi-drift-particles {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+        border-radius: 20px;
+      }
+
+      .kuromi-drift-particles span {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.45;
+        animation: kuromi-drift-float 14s ease-in-out infinite;
+      }
+
+      .kuromi-drift-particles span:nth-child(1) {
+        width: 6px;
+        height: 6px;
+        left: 12%;
+        top: 20%;
+        background: #f9a8d4;
+        animation-duration: 11s;
+        animation-delay: 0s;
+      }
+
+      .kuromi-drift-particles span:nth-child(2) {
+        width: 4px;
+        height: 4px;
+        left: 78%;
+        top: 15%;
+        background: #c4b5fd;
+        animation-duration: 13s;
+        animation-delay: -2s;
+      }
+
+      .kuromi-drift-particles span:nth-child(3) {
+        width: 5px;
+        height: 5px;
+        left: 55%;
+        top: 8%;
+        background: #fda4af;
+        animation-duration: 12s;
+        animation-delay: -4s;
+      }
+
+      .kuromi-drift-particles span:nth-child(4) {
+        width: 7px;
+        height: 7px;
+        left: 88%;
+        top: 42%;
+        background: #e9d5ff;
+        animation-duration: 15s;
+        animation-delay: -1s;
+      }
+
+      .kuromi-drift-particles span:nth-child(5) {
+        width: 4px;
+        height: 4px;
+        left: 18%;
+        top: 55%;
+        background: #f472b6;
+        animation-duration: 10s;
+        animation-delay: -3s;
+      }
+
+      .kuromi-drift-particles span:nth-child(6) {
+        width: 5px;
+        height: 5px;
+        left: 42%;
+        top: 62%;
+        background: #a78bfa;
+        animation-duration: 16s;
+        animation-delay: -5s;
+      }
+
+      .kuromi-drift-particles span:nth-child(7) {
+        width: 4px;
+        height: 4px;
+        left: 65%;
+        top: 78%;
+        background: #fbcfe8;
+        animation-duration: 12s;
+        animation-delay: -2.5s;
+      }
+
+      .kuromi-drift-particles span:nth-child(8) {
+        width: 6px;
+        height: 6px;
+        left: 8%;
+        top: 72%;
+        background: #ddd6fe;
+        animation-duration: 14s;
+        animation-delay: -6s;
+      }
+
+      @keyframes kuromi-drift-float {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+          opacity: 0.35;
+        }
+        25% {
+          transform: translate(8px, -12px) scale(1.1);
+          opacity: 0.55;
+        }
+        50% {
+          transform: translate(-6px, 6px) scale(0.95);
+          opacity: 0.4;
+        }
+        75% {
+          transform: translate(10px, 4px) scale(1.05);
+          opacity: 0.5;
+        }
+      }
+
+      @keyframes kuromi-rise {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes kuromi-line-in {
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .book.polaroid-kuromi .page.kuromi-page-enter .kuromi-cover-top .kuromi-mascot-hero {
+        animation: kuromi-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      .book.polaroid-kuromi .page.kuromi-page-enter .kuromi-cover-top .kuromi-deco {
+        animation: kuromi-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+      }
+
+      .book.polaroid-kuromi .page.kuromi-page-enter .kuromi-cover-top .kuromi-title {
+        animation: kuromi-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+      }
+
+      .book.polaroid-kuromi .page.kuromi-page-enter .kuromi-cover-top .kuromi-sub {
+        animation: kuromi-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
+      }
+
+      .book.polaroid-kuromi .page.kuromi-page-enter .polaroid-block {
+        animation: kuromi-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      .book.polaroid-kuromi .page.kuromi-page-enter .kuromi-scrap-text p {
+        opacity: 0;
+        animation: kuromi-line-in 0.58s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+
+      .book.polaroid-kuromi
+        .page.kuromi-page-enter
+        .kuromi-scrap-text
+        p:nth-child(1) {
+        animation-delay: 0.08s;
+      }
+
+      .book.polaroid-kuromi
+        .page.kuromi-page-enter
+        .kuromi-scrap-text
+        p:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .book.polaroid-kuromi
+        .page.kuromi-page-enter
+        .kuromi-scrap-text
+        p:nth-child(3) {
+        animation-delay: 0.32s;
+      }
+
+      .book.polaroid-kuromi
+        .page.kuromi-page-enter
+        .kuromi-scrap-text
+        p:nth-child(4) {
+        animation-delay: 0.44s;
+      }
+
+      .book.polaroid-kuromi
+        .page.kuromi-page-enter
+        .kuromi-scrap-text
+        p:nth-child(5) {
+        animation-delay: 0.56s;
+      }
+
+      .book.polaroid-kuromi .page.kuromi-page-enter .kuromi-signature {
+        opacity: 0;
+        animation: kuromi-line-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.28s
+          forwards;
+      }
+
+      .book.polaroid-kuromi .page.kuromi-page-enter .kuromi-title[style] {
+        animation: kuromi-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
+      }
+
+      .book.polaroid-kuromi .page.kuromi-page-enter .kuromi-page-inner[style*="center"] .kuromi-deco,
+      .book.polaroid-kuromi .page.kuromi-page-enter .kuromi-page-inner[style*="center"] .kuromi-title,
+      .book.polaroid-kuromi .page.kuromi-page-enter .kuromi-page-inner[style*="center"] .kuromi-sub,
+      .book.polaroid-kuromi
+        .page.kuromi-page-enter
+        .kuromi-page-inner[style*="center"]
+        .kuromi-signature {
+        animation: kuromi-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+      }
+
+      .book.polaroid-kuromi
+        .page.kuromi-page-enter
+        .kuromi-page-inner[style*="center"]
+        .kuromi-title {
+        animation-delay: 0.1s;
+      }
+
+      .book.polaroid-kuromi
+        .page.kuromi-page-enter
+        .kuromi-page-inner[style*="center"]
+        .kuromi-sub {
+        animation-delay: 0.22s;
+      }
+
+      .book.polaroid-kuromi
+        .page.kuromi-page-enter
+        .kuromi-page-inner[style*="center"]
+        .kuromi-signature {
+        animation-delay: 0.35s;
+      }
+
+      #sixthBook .kuromi-book-ambient {
+        position: absolute;
+        inset: -12px;
+        pointer-events: none;
+        z-index: 0;
+        overflow: visible;
+      }
+
+      #sixthBook .kuromi-book-ambient span {
+        position: absolute;
+        font-size: 20px;
+        opacity: 0.55;
+        filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+        animation: kuromi-drift 8s linear infinite;
+      }
+
+      #sixthBook .kuromi-book-ambient span:nth-child(1) {
+        left: -4%;
+        top: 20%;
+        animation-duration: 9s;
+      }
+
+      #sixthBook .kuromi-book-ambient span:nth-child(2) {
+        right: -2%;
+        top: 45%;
+        animation-duration: 11s;
+        animation-delay: -2s;
+      }
+
+      #sixthBook .kuromi-book-ambient span:nth-child(3) {
+        left: 10%;
+        bottom: -2%;
+        animation-duration: 10s;
+        animation-delay: -4s;
+      }
+
+      #sixthBook .kuromi-book-ambient span:nth-child(4) {
+        right: 8%;
+        top: -2%;
+        animation-duration: 12s;
+        animation-delay: -1s;
+      }
+
+      @keyframes kuromi-drift {
+        0% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+          transform: translate(4px, -6px) rotate(8deg);
+        }
+        50% {
+          transform: translate(-3px, 4px) rotate(-6deg);
+        }
+        75% {
+          transform: translate(5px, 2px) rotate(4deg);
+        }
+        100% {
+          transform: translate(0, 0) rotate(0deg);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .kuromi-sticker,
+        .kuromi-sparkle,
+        #sixthBook .kuromi-book-ambient span,
+        .kuromi-drift-particles span,
+        .book.polaroid-kuromi .page.active .polaroid-frame {
+          animation: none !important;
+        }
+
+        #sixthBook {
+          transform: none !important;
+        }
+
+        .kuromi-scrap-text {
+          scroll-behavior: auto;
+        }
+      }
+
+      /* Original “Kuromi-inspired” mascot (not official Sanrio art) */
+      .kuromi-mascot-hero {
+        width: min(130px, 38vw);
+        margin: 0 auto 10px;
+        filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.35));
+        animation: kuromi-mascot-bob 2.4s ease-in-out infinite;
+      }
+
+      .kuromi-mascot-hero svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .kuromi-mascot-corner {
+        position: absolute;
+        right: 6px;
+        bottom: 8px;
+        width: 56px;
+        height: 68px;
+        z-index: 80;
+        pointer-events: none;
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+        animation: kuromi-mascot-bob 3s ease-in-out infinite;
+        opacity: 0.95;
+      }
+
+      .kuromi-mascot-corner svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      @keyframes kuromi-mascot-bob {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      /* Heart / star burst overlay particles */
+      .kuromi-burst-particle {
+        position: fixed;
+        left: 0;
+        top: 0;
+        font-size: clamp(16px, 3.5vw, 26px);
+        line-height: 1;
+        pointer-events: none;
+        z-index: 9998;
+        will-change: transform, opacity;
+        animation: kuromi-burst-fly 2.4s ease-out forwards;
+      }
+
+      @keyframes kuromi-burst-fly {
+        0% {
+          transform: translate(0, 0) rotate(0deg) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--bx), var(--by)) rotate(var(--br))
+            scale(0.65);
+          opacity: 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .kuromi-mascot-hero,
+        .kuromi-mascot-corner,
+        .kuromi-burst-particle {
+          animation: none !important;
+        }
       }
 
       .caption {
@@ -1156,6 +2006,12 @@
               5th Monthsary
             </button>
             <button
+              class="menu-btn kuromi-menu-btn"
+              onclick="selectBook('sixth')"
+            >
+              6th Monthsary
+            </button>
+            <button
               class="heart-icon-btn"
               onclick="selectBook('valentine')"
             ></button>
@@ -1312,7 +2168,7 @@
             </p>
             <p>
               i still can’t quite believe it sometimes baby... and sometimes i catch myself
-              smiling for no reason… then i realize it’s because of you 
+              smiling for no reason… then i realize it’s because of you
             </p>
           </div>
         </div>
@@ -1426,6 +2282,377 @@
             <div class="notebook-signature">— Your Han <3</div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <div class="book notebook polaroid-kuromi" id="sixthBook" style="display: none">
+      <div class="kuromi-book-ambient" aria-hidden="true">
+        <span>🎀</span>
+        <span>💀</span>
+        <span>✨</span>
+        <span>💜</span>
+      </div>
+      <div class="kuromi-drift-particles" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="sixth-bottom-stack" id="sixthBottomStack">
+        <div class="sixth-nav-slot" id="sixthNavSlot"></div>
+        <div class="menu-container kuromi-back-menu" id="sixthBackWrap">
+          <button class="menu-btn back-to-menu" onclick="backToMenu()">
+            ← Back to Menu
+          </button>
+        </div>
+      </div>
+      <div class="page active">
+        <div class="kuromi-page-inner kuromi-cover">
+          <div class="kuromi-cover-top">
+          <div class="kuromi-sticker-layer" aria-hidden="true">
+            <span class="kuromi-sticker kuromi-sticker--1">💀</span>
+            <span class="kuromi-sticker kuromi-sticker--2">🎀</span>
+            <span class="kuromi-sticker kuromi-sticker--3">✨</span>
+            <span class="kuromi-sticker kuromi-sticker--4">💜</span>
+            <span class="kuromi-sticker kuromi-sticker--5">⭐</span>
+            <span class="kuromi-sticker kuromi-sticker--6">🌙</span>
+            <span class="kuromi-sparkle kuromi-sparkle--1"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--2"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--3"></span>
+          </div>
+          <div class="kuromi-mascot-hero" aria-hidden="true">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 100 120"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M50 14c-22 0-34 24-36 48-1 18 10 36 36 42 26-6 37-24 36-42-2-24-14-48-36-48z"
+                fill="#5b21b6"
+              />
+              <ellipse
+                cx="23"
+                cy="40"
+                rx="11"
+                ry="26"
+                fill="#5b21b6"
+                transform="rotate(-18 23 40)"
+              />
+              <ellipse
+                cx="77"
+                cy="40"
+                rx="11"
+                ry="26"
+                fill="#5b21b6"
+                transform="rotate(18 77 40)"
+              />
+              <ellipse cx="50" cy="68" rx="27" ry="30" fill="#fef9c3" />
+              <ellipse cx="40" cy="64" rx="5" ry="7" fill="#1e1b4b" />
+              <ellipse cx="60" cy="64" rx="5" ry="7" fill="#1e1b4b" />
+              <circle cx="33" cy="74" r="4" fill="#fda4af" opacity="0.65" />
+              <circle cx="67" cy="74" r="4" fill="#fda4af" opacity="0.65" />
+              <path
+                d="M44 78c4 3 8 3 12 0"
+                stroke="#1e1b4b"
+                stroke-width="1.2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M50 20c-12 0-20 10-20 10s8 8 20 8 20-8 20-8-8-10-20-10z"
+                fill="#ec4899"
+              />
+              <circle cx="50" cy="26" r="7" fill="#fce7f3" />
+              <circle cx="47" cy="25" r="1.8" fill="#1e1b4b" />
+              <circle cx="53" cy="25" r="1.8" fill="#1e1b4b" />
+              <path
+                d="M48 29c1 1 3 1 4 0"
+                stroke="#1e1b4b"
+                stroke-width="0.8"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
+          <div class="kuromi-deco">☆ mischief &amp; love ☆</div>
+          <div class="kuromi-title">happy 6th, my kyllie</div>
+          <div class="kuromi-sub">
+            a little polaroid scrapbook — kuromi-coded, han-made
+          </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="kuromi-page-inner">
+          <div class="kuromi-sticker-layer" aria-hidden="true">
+            <span class="kuromi-sticker kuromi-sticker--1">💀</span>
+            <span class="kuromi-sticker kuromi-sticker--2">🎀</span>
+            <span class="kuromi-sticker kuromi-sticker--3">✨</span>
+            <span class="kuromi-sticker kuromi-sticker--4">💜</span>
+            <span class="kuromi-sticker kuromi-sticker--5">⭐</span>
+            <span class="kuromi-sticker kuromi-sticker--6">🌙</span>
+            <span class="kuromi-sparkle kuromi-sparkle--1"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--2"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--3"></span>
+          </div>
+          <div class="polaroid-block">
+            <div class="polaroid-frame polaroid-tilt-left">
+              <div class="polaroid-tape"></div>
+              <img
+                src="./6th/IMG_3201.jpg"
+                alt="Us"
+                loading="eager"
+                decoding="async"
+              />
+              <div class="polaroid-stripe">month six — still my favorite plot twist</div>
+            </div>
+          </div>
+          <div class="kuromi-scrap-text">
+            <p>
+              hi baby, happy 6th monthsary. half a year of you choosing me, and
+              i still get butterflies like it’s day one.
+            </p>
+            <p>
+             i hope you'll love this kuromi inspired scrapbook
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="kuromi-page-inner">
+          <div class="kuromi-sticker-layer" aria-hidden="true">
+            <span class="kuromi-sticker kuromi-sticker--1">💀</span>
+            <span class="kuromi-sticker kuromi-sticker--2">🎀</span>
+            <span class="kuromi-sticker kuromi-sticker--3">✨</span>
+            <span class="kuromi-sticker kuromi-sticker--4">💜</span>
+            <span class="kuromi-sticker kuromi-sticker--5">⭐</span>
+            <span class="kuromi-sticker kuromi-sticker--6">🌙</span>
+            <span class="kuromi-sparkle kuromi-sparkle--1"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--2"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--3"></span>
+          </div>
+          <div class="polaroid-block">
+            <div class="polaroid-frame polaroid-tilt-right">
+              <div class="polaroid-tape"></div>
+              <img
+                src="./6th/IMG_5359.JPG"
+                alt="Love"
+                loading="eager"
+                decoding="async"
+              />
+              <div class="polaroid-stripe">i'll get that rabbit for you one day</div>
+            </div>
+          </div>
+          <div class="kuromi-scrap-text">
+            <p>
+              these past few weeks have been really tough on us, mostly on you,
+              and on us as a couple. it’s been really challenging, and i’m not
+              going to pretend most of it wasn't my fault. i’m sorry my baby.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="kuromi-page-inner">
+          <div class="kuromi-sticker-layer" aria-hidden="true">
+            <span class="kuromi-sticker kuromi-sticker--1">💀</span>
+            <span class="kuromi-sticker kuromi-sticker--2">🎀</span>
+            <span class="kuromi-sticker kuromi-sticker--3">✨</span>
+            <span class="kuromi-sticker kuromi-sticker--4">💜</span>
+            <span class="kuromi-sticker kuromi-sticker--5">⭐</span>
+            <span class="kuromi-sticker kuromi-sticker--6">🌙</span>
+            <span class="kuromi-sparkle kuromi-sparkle--1"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--2"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--3"></span>
+          </div>
+          <div class="polaroid-block">
+            <div class="polaroid-frame polaroid-tilt-left">
+              <div class="polaroid-tape"></div>
+              <img
+                src="./6th/IMG_5367.JPG"
+                alt="Favorite"
+                loading="eager"
+                decoding="async"
+              />
+              <div class="polaroid-stripe">amaze amaze amaze girlfriend</div>
+            </div>
+          </div>
+          <div class="kuromi-scrap-text">
+            <p>
+              i haven’t been the perfect partner through all of this i know
+              that. i’ve let you down in ways i wish i could rewind, and i hate
+              that you’ve had to feel any of that on top of everything else.
+            </p>
+            <p>
+              i’m not asking for a free pass. i’m asking for a real chance to
+              make it up to you my kyky, with patience, consistency, and showing up
+              better, not just saying it.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="kuromi-page-inner">
+          <div class="kuromi-sticker-layer" aria-hidden="true">
+            <span class="kuromi-sticker kuromi-sticker--1">💀</span>
+            <span class="kuromi-sticker kuromi-sticker--2">🎀</span>
+            <span class="kuromi-sticker kuromi-sticker--3">✨</span>
+            <span class="kuromi-sticker kuromi-sticker--4">💜</span>
+            <span class="kuromi-sticker kuromi-sticker--5">⭐</span>
+            <span class="kuromi-sticker kuromi-sticker--6">🌙</span>
+            <span class="kuromi-sparkle kuromi-sparkle--1"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--2"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--3"></span>
+          </div>
+          <div class="polaroid-block">
+            <div class="polaroid-frame polaroid-tilt-right">
+              <div class="polaroid-tape"></div>
+              <img
+                src="./6th/IMG_5395.JPG"
+                alt="Memory"
+                loading="eager"
+                decoding="async"
+              />
+              <div class="polaroid-stripe">my goofy girl</div>
+            </div>
+          </div>
+          <div class="kuromi-scrap-text">
+            <p>
+              i just wanan remind you that i love you so much, and im very grateful for you
+              and i don’t take your heart for granted. i wanna choose you, and
+              i still want to build something steady with you, even when it’s
+              hard.
+            </p>
+            <p>
+              thank you for loving me through messy chapters. i’m going to keep
+              earning that love in the ways that actually matter to you.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="kuromi-page-inner">
+          <div class="kuromi-sticker-layer" aria-hidden="true">
+            <span class="kuromi-sticker kuromi-sticker--1">💀</span>
+            <span class="kuromi-sticker kuromi-sticker--2">🎀</span>
+            <span class="kuromi-sticker kuromi-sticker--3">✨</span>
+            <span class="kuromi-sticker kuromi-sticker--4">💜</span>
+            <span class="kuromi-sticker kuromi-sticker--5">⭐</span>
+            <span class="kuromi-sticker kuromi-sticker--6">🌙</span>
+            <span class="kuromi-sparkle kuromi-sparkle--1"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--2"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--3"></span>
+          </div>
+          <div class="polaroid-block">
+            <div class="polaroid-frame polaroid-tilt-left">
+              <div class="polaroid-tape"></div>
+              <img
+                src="./6th/IMG_5410.JPG"
+                alt="Us"
+                loading="eager"
+                decoding="async"
+              />
+              <div class="polaroid-stripe">to more months, more memories, more us</div>
+            </div>
+          </div>
+          <div class="kuromi-scrap-text">
+            <p>
+              and right now, i want you to lock in sa tournament mo!
+              good luck, baby! i hope you feel how proud i am of you,
+              how hard you’ve worked, and how much i believe in you out there.
+            </p>
+            <p>
+              go play your heart out. i’ll be cheering for you in every way i
+              can. happy 6th monthsary, kyllie baby, i love you.            </p>
+            <div class="kuromi-signature">— your Han</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="kuromi-page-inner" style="justify-content: center">
+          <div class="kuromi-sticker-layer" aria-hidden="true">
+            <span class="kuromi-sticker kuromi-sticker--1">💀</span>
+            <span class="kuromi-sticker kuromi-sticker--2">🎀</span>
+            <span class="kuromi-sticker kuromi-sticker--3">✨</span>
+            <span class="kuromi-sticker kuromi-sticker--4">💜</span>
+            <span class="kuromi-sticker kuromi-sticker--5">⭐</span>
+            <span class="kuromi-sticker kuromi-sticker--6">🌙</span>
+            <span class="kuromi-sparkle kuromi-sparkle--1"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--2"></span>
+            <span class="kuromi-sparkle kuromi-sparkle--3"></span>
+          </div>
+          <div class="kuromi-deco">☆ the end? never. ☆</div>
+          <div class="kuromi-title" style="font-size: 20px">see you in chapter 7</div>
+          <div class="kuromi-sub" style="margin-top: 12px">
+            flip back anytime, this scrapbook’s always open for you.
+          </div>
+          <div class="kuromi-signature" style="margin-top: 20px; text-align: center">
+            i love you, kyky
+          </div>
+        </div>
+      </div>
+      <!-- Kuromi-inspired mascot peek (original SVG — not official Sanrio art) -->
+      <div class="kuromi-mascot-corner" aria-hidden="true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 100 120"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M50 14c-22 0-34 24-36 48-1 18 10 36 36 42 26-6 37-24 36-42-2-24-14-48-36-48z"
+            fill="#5b21b6"
+          />
+          <ellipse
+            cx="23"
+            cy="40"
+            rx="11"
+            ry="26"
+            fill="#5b21b6"
+            transform="rotate(-18 23 40)"
+          />
+          <ellipse
+            cx="77"
+            cy="40"
+            rx="11"
+            ry="26"
+            fill="#5b21b6"
+            transform="rotate(18 77 40)"
+          />
+          <ellipse cx="50" cy="68" rx="27" ry="30" fill="#fef9c3" />
+          <ellipse cx="40" cy="64" rx="5" ry="7" fill="#1e1b4b" />
+          <ellipse cx="60" cy="64" rx="5" ry="7" fill="#1e1b4b" />
+          <circle cx="33" cy="74" r="4" fill="#fda4af" opacity="0.65" />
+          <circle cx="67" cy="74" r="4" fill="#fda4af" opacity="0.65" />
+          <path
+            d="M44 78c4 3 8 3 12 0"
+            stroke="#1e1b4b"
+            stroke-width="1.2"
+            stroke-linecap="round"
+          />
+          <path
+            d="M50 20c-12 0-20 10-20 10s8 8 20 8 20-8 20-8-8-10-20-10z"
+            fill="#ec4899"
+          />
+          <circle cx="50" cy="26" r="7" fill="#fce7f3" />
+          <circle cx="47" cy="25" r="1.8" fill="#1e1b4b" />
+          <circle cx="53" cy="25" r="1.8" fill="#1e1b4b" />
+          <path
+            d="M48 29c1 1 3 1 4 0"
+            stroke="#1e1b4b"
+            stroke-width="0.8"
+            stroke-linecap="round"
+          />
+        </svg>
       </div>
     </div>
 
@@ -1549,13 +2776,15 @@
 
     <script>
       let current = 0;
-      let currentBook = "menu"; // 'menu', 'letter', or 'valentine'
+      let currentBook = "menu"; // 'menu', 'letter', 'valentine', 'anniversary', 'sixth'
       let letterBook = null;
       let valentineBook = null;
       let anniversaryBook = null;
+      let sixthBook = null;
       let letterPages = null;
       let valentinePages = null;
       let anniversaryPages = null;
+      let sixthPages = null;
 
       const nextBtn = document.getElementById("nextBtn");
       const backBtn = document.getElementById("backBtn");
@@ -1580,9 +2809,11 @@
         letterBook = document.getElementById("book");
         valentineBook = document.getElementById("valentineBook");
         anniversaryBook = document.getElementById("anniversaryBook");
+        sixthBook = document.getElementById("sixthBook");
         letterPages = letterBook.querySelectorAll(".page");
         valentinePages = valentineBook.querySelectorAll(".page");
         anniversaryPages = anniversaryBook.querySelectorAll(".page");
+        sixthPages = sixthBook.querySelectorAll(".page");
       }
 
       // Preload all images immediately
@@ -1603,43 +2834,82 @@
         "./4th/att.7bp0OuHBL2TDhhnut5V-VqoL2h8LS63ulbsCse-gxa4.JPG",
         "./4th/att.E6SNov53XxHcSAGDO_34VjpNQuZZVYkq_b0W735QmXw.JPG",
         "./4th/att.HoDYRfMlfQ8LoaXUJ6bN5a8WMN5rsxIxXwoPsWcbphM.JPG",
+        "./6th/IMG_3201.jpg",
+        "./6th/IMG_5359.JPG",
+        "./6th/IMG_5367.JPG",
+        "./6th/IMG_5395.JPG",
+        "./6th/IMG_5410.JPG",
+        "./6th/att.Ple9B9rE6av7SoPetx22vL1fVU2_QdhtNCCbtdyQVV8.JPG",
       ];
       imageSources.forEach((src) => {
         const img = new Image();
         img.src = src;
       });
 
+      const bookContainer = document.querySelector(".book-container");
+
+      function attachControlsToBookContainer() {
+        if (bookContainer && controls.parentElement !== bookContainer) {
+          bookContainer.appendChild(controls);
+        }
+      }
+
+      function attachControlsToSixthNav() {
+        const slot = document.getElementById("sixthNavSlot");
+        if (slot && controls.parentElement !== slot) {
+          slot.appendChild(controls);
+        }
+      }
+
       function selectBook(bookType) {
         if (bookType === "letter") {
+          attachControlsToBookContainer();
           currentBook = "letter";
           current = 1; // Skip the menu page
           letterBook.style.display = "block";
           valentineBook.style.display = "none";
           anniversaryBook.style.display = "none";
+          sixthBook.style.display = "none";
           showPage(current, "letter");
         } else if (bookType === "valentine") {
+          attachControlsToBookContainer();
           currentBook = "valentine";
           current = 1; // Skip the menu page
           letterBook.style.display = "none";
           valentineBook.style.display = "block";
           anniversaryBook.style.display = "none";
+          sixthBook.style.display = "none";
           showPage(current, "valentine");
         } else if (bookType === "anniversary") {
+          attachControlsToBookContainer();
           currentBook = "anniversary";
           current = 1; // Skip the menu page
           letterBook.style.display = "none";
           valentineBook.style.display = "none";
           anniversaryBook.style.display = "block";
+          sixthBook.style.display = "none";
           showPage(current, "anniversary");
+        } else if (bookType === "sixth") {
+          currentBook = "sixth";
+          current = 0;
+          letterBook.style.display = "none";
+          valentineBook.style.display = "none";
+          anniversaryBook.style.display = "none";
+          sixthBook.style.display = "block";
+          attachControlsToSixthNav();
+          showPage(current, "sixth");
+          triggerKuromiBurst();
         }
       }
 
       function backToMenu() {
+        attachControlsToBookContainer();
         currentBook = "menu";
         current = 0;
         letterBook.style.display = "block";
         valentineBook.style.display = "none";
         anniversaryBook.style.display = "none";
+        sixthBook.style.display = "none";
         showPage(0, "letter");
       }
 
@@ -1654,6 +2924,9 @@
           } else if (bookType === "anniversary") {
             pages = anniversaryPages;
             lastPageIndex = anniversaryPages.length - 1;
+          } else if (bookType === "sixth") {
+            pages = sixthPages;
+            lastPageIndex = sixthPages.length - 1;
           } else {
             pages = letterPages;
             lastPageIndex = letterPages.length - 1;
@@ -1671,10 +2944,25 @@
           });
           pages[index].classList.add("active");
 
+          if (bookType === "sixth") {
+            sixthBook.classList.toggle("sixth-on-cover", index === 0);
+            sixthPages.forEach((p) => p.classList.remove("kuromi-page-enter"));
+            const reduceMotion = window.matchMedia(
+              "(prefers-reduced-motion: reduce)"
+            ).matches;
+            if (!reduceMotion) {
+              void pages[index].offsetWidth;
+              pages[index].classList.add("kuromi-page-enter");
+            }
+            const scrapEl = pages[index].querySelector(".kuromi-scrap-text");
+            if (scrapEl) scrapEl.scrollTop = 0;
+          }
+
           backBtn.disabled =
             (index === 0 && bookType !== "valentine") ||
             (index === 0 && bookType === "valentine") ||
-            (index === 0 && bookType === "anniversary");
+            (index === 0 && bookType === "anniversary") ||
+            (index === 0 && bookType === "sixth");
           nextBtn.disabled = index === lastPageIndex;
 
           // Hide book and show letter section on last page of letter book
@@ -1692,6 +2980,10 @@
             letterSection.classList.remove("show");
           } else if (index === lastPageIndex && bookType === "anniversary") {
             // Keep the monthsary experience inside the notebook (no envelope swap)
+            letterBook.classList.remove("hidden");
+            controls.classList.remove("hidden");
+            anniversaryLetterSection.classList.remove("show");
+          } else if (index === lastPageIndex && bookType === "sixth") {
             letterBook.classList.remove("hidden");
             controls.classList.remove("hidden");
             anniversaryLetterSection.classList.remove("show");
@@ -1733,6 +3025,12 @@
             current++;
             showPage(current, "anniversary");
           }
+        } else if (currentBook === "sixth") {
+          pages = sixthPages;
+          if (current < pages.length - 1) {
+            current++;
+            showPage(current, "sixth");
+          }
         } else {
           pages = letterPages;
           if (current < pages.length - 1) {
@@ -1749,6 +3047,8 @@
             showPage(current, "valentine");
           } else if (currentBook === "anniversary") {
             showPage(current, "anniversary");
+          } else if (currentBook === "sixth") {
+            showPage(current, "sixth");
           } else {
             showPage(current, "letter");
           }
@@ -1789,6 +3089,35 @@
           confetti.style.animationDuration = 4 + Math.random() * 3 + "s";
           confetti.style.opacity = 0.6 + Math.random() * 0.4;
           document.body.appendChild(confetti);
+        }
+      }
+
+      /** Heart & star burst when opening 6th monthsary scrapbook */
+      function triggerKuromiBurst() {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          return;
+        }
+        const symbols = ["💖", "✨", "⭐", "💜", "🌟", "💕", "✦", "♥", "💗"];
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight * 0.28;
+        const count = 76;
+        for (let i = 0; i < count; i++) {
+          const el = document.createElement("div");
+          el.className = "kuromi-burst-particle";
+          el.setAttribute("aria-hidden", "true");
+          el.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+          const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.4;
+          const dist = 100 + Math.random() * 320;
+          const bx = Math.cos(angle) * dist + (Math.random() - 0.5) * 40;
+          const by = Math.sin(angle) * dist + Math.random() * 100;
+          const br = (Math.random() - 0.5) * 540 + "deg";
+          el.style.left = cx + "px";
+          el.style.top = cy + "px";
+          el.style.setProperty("--bx", bx + "px");
+          el.style.setProperty("--by", by + "px");
+          el.style.setProperty("--br", br);
+          document.body.appendChild(el);
+          setTimeout(() => el.remove(), 2600);
         }
       }
 
@@ -1867,6 +3196,42 @@
       }
 
       initializeBooks();
+
+      (function setupSixthBookParallax() {
+        const book = document.getElementById("sixthBook");
+        if (!book) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          return;
+        }
+        let raf = 0;
+        book.addEventListener("pointermove", (e) => {
+          if (getComputedStyle(book).display === "none") return;
+          const r = book.getBoundingClientRect();
+          const cx = r.left + r.width / 2;
+          const cy = r.top + r.height / 2;
+          const nx = Math.max(
+            -1,
+            Math.min(1, (e.clientX - cx) / (r.width / 2 || 1))
+          );
+          const ny = Math.max(
+            -1,
+            Math.min(1, (e.clientY - cy) / (r.height / 2 || 1))
+          );
+          cancelAnimationFrame(raf);
+          raf = requestAnimationFrame(() => {
+            book.style.setProperty("--kuromi-tilt-x", (nx * 3).toFixed(2) + "deg");
+            book.style.setProperty(
+              "--kuromi-tilt-y",
+              (-ny * 2.5).toFixed(2) + "deg"
+            );
+          });
+        });
+        book.addEventListener("pointerleave", () => {
+          book.style.setProperty("--kuromi-tilt-x", "0deg");
+          book.style.setProperty("--kuromi-tilt-y", "0deg");
+        });
+      })();
+
       showPage(current, "letter");
       createFloatingElements("floating-heart", 8);
       createFloatingElements("floating-petal", 10);
